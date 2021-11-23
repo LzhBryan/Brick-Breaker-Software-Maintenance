@@ -11,19 +11,10 @@ import java.awt.geom.RectangularShape;
 abstract public class Ball {
 
     private Shape ballFace;
-
     private Point2D center;
-
-    Point2D up;
-    Point2D down;
-    Point2D left;
-    Point2D right;
-
-    private Color border;
-    private Color inner;
-
-    private int speedX;
-    private int speedY;
+    Point2D up, down, left, right;
+    private Color border, inner;
+    private int speedX, speedY;
 
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){
         this.center = center;
@@ -35,10 +26,8 @@ abstract public class Ball {
 
         up.setLocation(center.getX(),center.getY()-(radiusB / 2));
         down.setLocation(center.getX(),center.getY()+(radiusB / 2));
-
         left.setLocation(center.getX()-(radiusA /2),center.getY());
         right.setLocation(center.getX()+(radiusA /2),center.getY());
-
 
         ballFace = makeBall(center,radiusA,radiusB);
         this.border = border;
@@ -57,7 +46,6 @@ abstract public class Ball {
 
         tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
         setPoints(w,h);
-
 
         ballFace = tmp;
     }
@@ -125,6 +113,4 @@ abstract public class Ball {
     public int getSpeedY(){
         return speedY;
     }
-
-
 }

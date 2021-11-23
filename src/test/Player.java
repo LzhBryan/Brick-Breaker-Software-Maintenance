@@ -43,7 +43,6 @@ public class Player {
         playerFace = makeRectangle(width, height);
         min = container.x + (width / 2);
         max = min + container.width - width;
-
     }
 
     private Rectangle makeRectangle(int width,int height){

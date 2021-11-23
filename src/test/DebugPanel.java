@@ -22,39 +22,32 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-
-
 public class DebugPanel extends JPanel {
-
     private static final Color DEF_BKG = Color.WHITE;
-
-
     private JButton skipLevel;
     private JButton resetBalls;
-
     private JSlider ballXSpeed;
     private JSlider ballYSpeed;
 
     private Wall wall;
+    private GameLogicControl gameLogic;
 
-    public DebugPanel(Wall wall){
-
+    public DebugPanel(Wall wall, GameLogicControl gameLogic){
         this.wall = wall;
+        this.gameLogic = gameLogic;
 
         initialize();
 
         skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
-        resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
+        resetBalls = makeButton("Reset Balls",e -> gameLogic.resetBallCount());
 
-        ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
-        ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()));
+        ballXSpeed = makeSlider(-4,4,e -> gameLogic.setBallXSpeed(ballXSpeed.getValue()));
+        ballYSpeed = makeSlider(-4,4,e -> gameLogic.setBallYSpeed(ballYSpeed.getValue()));
 
         this.add(skipLevel);
         this.add(resetBalls);
-
         this.add(ballXSpeed);
         this.add(ballYSpeed);
-
     }
 
     private void initialize(){
@@ -81,5 +74,4 @@ public class DebugPanel extends JPanel {
         ballXSpeed.setValue(x);
         ballYSpeed.setValue(y);
     }
-
 }
