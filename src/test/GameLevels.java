@@ -19,7 +19,7 @@ package test;
 
 import java.awt.*;
 
-public class Wall {
+public class GameLevels {
     private static final int LEVELS_COUNT = 4;
     private static final int CLAY = 1;
     private static final int STEEL = 2;
@@ -27,22 +27,18 @@ public class Wall {
 
     Brick[] bricks;
     GameLogicControl gameLogic;
-    GameLevels gameLevels;
     private Brick[][] levels;
     private int level, brickCount;
 
-
-    public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
-
+    public GameLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
     }
 
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
-        /*
-          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
-          multiple of lineCount smaller then brickCount
-         */
+
+         //if brickCount is not divisible by line count,brickCount is adjusted to the biggest
+         // multiple of lineCount smaller then brickCount
 
         //Parameters:
         //drawArea = new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT)
@@ -99,10 +95,10 @@ public class Wall {
     }
 
     private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
-        /*
-          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
-          multiple of lineCount smaller then brickCount
-         */
+
+          //if brickCount is not divisible by line count,brickCount is adjusted to the biggest
+          //multiple of lineCount smaller then brickCount
+
         brickCnt -= brickCnt % lineCnt;
 
         int brickOnLine = brickCnt / lineCnt;

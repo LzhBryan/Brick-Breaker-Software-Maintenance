@@ -40,16 +40,16 @@ public class GameLogicControl {
         this.area = drawArea;
     }
 
-    public void findImpacts(Wall wall){
+    public void findImpacts(GameLevels gameLevels){
         if(player.impact(ball)){
             ball.reverseY();
             // touches the bar?
         }
-        else if(impactWall(wall.getBricks())){
+        else if(impactWall(gameLevels.getBricks())){
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
-            wall.ReduceBrickCount();
+            gameLevels.ReduceBrickCount();
         }
         else if(impactBorder()) {
             ball.reverseX();

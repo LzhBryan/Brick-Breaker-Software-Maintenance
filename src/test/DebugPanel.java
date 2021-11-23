@@ -29,16 +29,16 @@ public class DebugPanel extends JPanel {
     private JSlider ballXSpeed;
     private JSlider ballYSpeed;
 
-    private Wall wall;
+    private GameLevels gameLevels;
     private GameLogicControl gameLogic;
 
-    public DebugPanel(Wall wall, GameLogicControl gameLogic){
-        this.wall = wall;
+    public DebugPanel(GameLevels gameLevels, GameLogicControl gameLogic){
+        this.gameLevels = gameLevels;
         this.gameLogic = gameLogic;
 
         initialize();
 
-        skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
+        skipLevel = makeButton("Skip Level",e -> gameLevels.nextLevel());
         resetBalls = makeButton("Reset Balls",e -> gameLogic.resetBallCount());
 
         ballXSpeed = makeSlider(-4,4,e -> gameLogic.setBallXSpeed(ballXSpeed.getValue()));

@@ -39,9 +39,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final Color BG_COLOR = Color.WHITE;
 
     private Timer gameTimer;
-    private Wall wall;
-    private GameLogicControl gameLogic;
     private GameLevels gameLevels;
+    private GameLogicControl gameLogic;
     private String message;
     private Font menuFont;
     private Rectangle continueButtonRect;
@@ -61,33 +60,33 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         this.initialize();
         message = "";
-        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2);
+        gameLevels = new GameLevels(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2);
         gameLogic = new GameLogicControl(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),new Point(300,430));
-        debugConsole = new DebugConsole(owner,wall,this, gameLogic);
+        debugConsole = new DebugConsole(owner, gameLevels,this, gameLogic);
         //initialize the first level
-        wall.nextLevel();
+        gameLevels.nextLevel();
 
         // refresh frame per 10 milliseconds
         gameTimer = new Timer(10,e ->{
             gameLogic.move();    // start moving ball and player
-            gameLogic.findImpacts(wall); // start detecting ball collision with wall
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),gameLogic.getBallCount());
+            gameLogic.findImpacts(gameLevels); // start detecting ball collision with wall
+            message = String.format("Bricks: %d Balls %d", gameLevels.getBrickCount(),gameLogic.getBallCount());
 
             if(gameLogic.isBallLost()){
                 if(gameLogic.ballEnd()){
-                    wall.wallReset();
+                    gameLevels.wallReset();
                     message = "Game over";
                 }
                 gameLogic.ballReset();
                 gameTimer.stop();
             }
-            else if(wall.isDone()){
-                if(wall.hasLevel()){
+            else if(gameLevels.isDone()){
+                if(gameLevels.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
                     gameLogic.ballReset();
-                    wall.wallReset();
-                    wall.nextLevel();
+                    gameLevels.wallReset();
+                    gameLevels.nextLevel();
                 }
                 else{
                     message = "ALL WALLS DESTROYED";
@@ -121,7 +120,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         drawBall(gameLogic.ball,g2d);
 
-        for(Brick b : wall.bricks)
+        for(Brick b : gameLevels.bricks)
             if(!b.isBroken())
                 drawBrick(b,g2d);
 
@@ -305,7 +304,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         else if(restartButtonRect.contains(p)){
             message = "Restarting Game...";
             gameLogic.ballReset();
-            wall.wallReset();
+            gameLevels.wallReset();
             showPauseMenu = false;
             repaint();
         }
