@@ -30,7 +30,8 @@ public class GameLevels {
     private Brick[][] levels;
     private int level, brickCount;
 
-    public GameLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
+    public GameLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, GameLogicControl gameLogic){
+        this.gameLogic = gameLogic;
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
     }
