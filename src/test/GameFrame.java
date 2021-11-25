@@ -31,7 +31,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private GameBoard gameBoard;
     private HomeMenu homeMenu;
-
     private boolean gaming;
 
     public GameFrame(){
@@ -42,14 +41,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLayout(new BorderLayout());
 
         gameBoard = new GameBoard(this);
-
         homeMenu = new HomeMenu(this,new Dimension(450,300));
 
         this.add(homeMenu,BorderLayout.CENTER);
-
-        this.setUndecorated(true);
-
-
+        this.setUndecorated(false); //used to be true
     }
 
     public void initialize(){
@@ -68,7 +63,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         initialize();
         /*to avoid problems with graphics focus controller is added here*/
         this.addWindowFocusListener(this);
-
     }
 
     private void autoLocate(){
@@ -77,7 +71,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         int y = (size.height - this.getHeight()) / 2;
         this.setLocation(x,y);
     }
-
 
     @Override
     public void windowGainedFocus(WindowEvent windowEvent) {
@@ -96,6 +89,5 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)
             gameBoard.onLostFocus();
-
     }
 }

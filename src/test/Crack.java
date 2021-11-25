@@ -18,11 +18,8 @@ public class Crack{
     public static final int HORIZONTAL = 200;
 
     private static Random rnd;
-
     private GeneralPath crack;
-
-    private int crackDepth;
-    private int steps;
+    private int crackDepth, steps;
 
     public Crack(int crackDepth, int steps){
 

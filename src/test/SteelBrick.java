@@ -36,9 +36,9 @@ public class SteelBrick extends Brick {
     public SteelBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         rnd = new Random();
-        brickFace = super.brickFace;
+        //brickFace = super.brickFace;
+        brickFace = makeBrickFace(point, size);
     }
-
 
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size) {
@@ -54,7 +54,7 @@ public class SteelBrick extends Brick {
         if(super.isBroken())
             return false;
         impact();
-        return  super.isBroken();
+        return super.isBroken();
     }
 
     public void impact(){
@@ -62,5 +62,4 @@ public class SteelBrick extends Brick {
             super.impact();
         }
     }
-
 }

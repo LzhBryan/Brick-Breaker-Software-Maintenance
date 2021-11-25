@@ -2,9 +2,7 @@ package test;
 
 import java.awt.*;
 import java.awt.Point;
-import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
-import java.util.Random;
 
 /**
  * Created by filippo on 04/09/16.
@@ -12,29 +10,20 @@ import java.util.Random;
  */
 abstract public class Brick  {
 
-    public static final int MIN_CRACK = 1;
     public static final int DEF_CRACK_DEPTH = 1;
     public static final int DEF_STEPS = 35;
-
     public static final int UP_IMPACT = 100;
     public static final int DOWN_IMPACT = 200;
     public static final int LEFT_IMPACT = 300;
     public static final int RIGHT_IMPACT = 400;
 
-    private static Random rnd;
-    private String name;
     Shape brickFace;
-
-    private Color border;
-    private Color inner;
-
-    private int fullStrength;
-    private int strength;
-
+    private String name;
+    private Color border, inner;
+    private int fullStrength, strength;
     private boolean broken;
 
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
-        rnd = new Random();
         broken = false;
         this.name = name;
         brickFace = makeBrickFace(pos,size);
@@ -91,8 +80,3 @@ abstract public class Brick  {
         broken = (strength == 0);
     }
 }
-
-
-
-
-
