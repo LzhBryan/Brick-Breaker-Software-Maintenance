@@ -21,9 +21,10 @@ import java.awt.*;
 
 public class GameLevels {
     private static final int LEVELS_COUNT = 4;
-    private static final int CLAY = 1;
-    private static final int STEEL = 2;
-    private static final int CEMENT = 3;
+
+//    private static final int CLAY = 1;
+//    private static final int STEEL = 2;
+//    private static final int CEMENT = 3;
 
     Brick[] bricks;
     GameLogicControl gameLogic;
@@ -36,7 +37,7 @@ public class GameLevels {
         level = 0;
     }
 
-    private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
+    private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, String brickType){
 
          //if brickCount is not divisible by line count,brickCount is adjusted to the biggest
          // multiple of lineCount smaller then brickCount
@@ -78,7 +79,7 @@ public class GameLevels {
             // get y coordinates of brick rows
             p.setLocation(x,y);
             // set location coordinates
-            tmp[i] = makeBrick(p,brickSize,type);
+            tmp[i] = makeBrick(p,brickSize,brickType);
             // make brick according to type of bricks
             //System.out.println(i);
         }
@@ -95,7 +96,7 @@ public class GameLevels {
         // must return full size of tmp
     }
 
-    private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
+    private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, String brickTypeA, String brickTypeB){
 
           //if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           //multiple of lineCount smaller then brickCount
@@ -133,7 +134,7 @@ public class GameLevels {
             // line % 2 != 0 proc when its first and third row of bricks
             // posX > centerLeft && posX <= centerRight means brick 5-6
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
+            tmp[i] = b ?  makeBrick(p,brickSize,brickTypeA) : makeBrick(p,brickSize,brickTypeB);
             // first condition: even rows of bricks will alternate the colors of bricks,
             // second condition is the odd rows of bricks, brick 15 and 16 will make second condition turn true
         }
@@ -141,17 +142,17 @@ public class GameLevels {
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,typeA);
+            tmp[i] = makeBrick(p,brickSize,brickTypeA);
         }
         return tmp;
     }
 
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
-        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,"CLAY");
+        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,"CLAY","CEMENT");
+        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,"CLAY","STEEL");
+        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,"STEEL","CEMENT");
         return tmp;
     }
 
@@ -174,22 +175,9 @@ public class GameLevels {
         gameLogic.setBallCount(3);
     }
 
-    private Brick makeBrick(Point point, Dimension size, int type){
-        Brick out;
-        switch(type){
-            case CLAY:
-                out = new ClayBrick(point,size);
-                break;
-            case STEEL:
-                out = new SteelBrick(point,size);
-                break;
-            case CEMENT:
-                out = new CementBrick(point, size);
-                break;
-            default:
-                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
-        }
-        return  out;
+    public Brick makeBrick(Point point, Dimension size, String type){
+        BrickFactory brickFactory = new BrickFactory();
+        return brickFactory.getBricks(type, size, point);
     }
 
     public boolean isDone(){
