@@ -38,35 +38,35 @@ public class GameBoard extends JComponent implements KeyListener{
 
         this.initialize();
         message = "";
-        gameLogic = new GameLogicControl(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),new Point(300,430));
-        gameLevels = new GameLevels(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2, gameLogic);
+        gameLogic = new GameLogicControl(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2, new Point(300,430));
+        //gameLevels = new GameLevels(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2);
         debugConsole = new DebugConsole(owner, gameLevels,this, gameLogic);
         pauseMenu = new PauseMenu(this, gameLevels, gameLogic);
 
         //initialize the first level
-        gameLevels.nextLevel();
+        gameLogic.nextLevel();
 
         // refresh frame per 10 milliseconds
         gameTimer = new Timer(10,e ->{
             gameLogic.move();    // start moving ball and player
             gameLogic.findImpacts(gameLevels); // start detecting ball collision with wall
-            message = String.format("Bricks: %d Balls %d", gameLevels.getBrickCount(),gameLogic.getBallCount());
+            message = String.format("Bricks: %d Balls %d", gameLogic.getBrickCount(),gameLogic.getBallCount());
 
             if(gameLogic.isBallLost()){
                 if(gameLogic.ballEnd()){
-                    gameLevels.wallReset();
+                    gameLogic.wallReset();
                     message = "Game over";
                 }
                 gameLogic.ballReset();
                 gameTimer.stop();
             }
-            else if(gameLevels.isDone()){
-                if(gameLevels.hasLevel()){
+            else if(gameLogic.isDone()){
+                if(gameLogic.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
                     gameLogic.ballReset();
-                    gameLevels.wallReset();
-                    gameLevels.nextLevel();
+                    gameLogic.wallReset();
+                    gameLogic.nextLevel();
                 }
                 else{
                     message = "ALL WALLS DESTROYED";
@@ -97,7 +97,7 @@ public class GameBoard extends JComponent implements KeyListener{
 
         drawBall(gameLogic.ball,g2d);
 
-        for(Brick b : gameLevels.bricks)
+        for(Brick b : gameLogic.bricks)
             if(!b.isBroken())
                 drawBrick(b,g2d);
 

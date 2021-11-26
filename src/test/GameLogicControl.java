@@ -14,7 +14,13 @@ public class GameLogicControl {
     private int ballCount;
     private boolean ballLost;
 
-    public GameLogicControl(Rectangle drawArea,Point ballPos){
+    private GameLevels gameLevels;
+
+    Brick[] bricks;
+    private Brick[][] levels;
+    private int level, brickCount;
+
+    public GameLogicControl(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio,Point ballPos){
         startPoint = new Point(ballPos);
         ballCount = 3;
         ballLost = false;
@@ -38,6 +44,10 @@ public class GameLogicControl {
 
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
         this.area = drawArea;
+
+        gameLevels = new GameLevels(this);
+        levels = gameLevels.makeLevels(drawArea,brickCount,lineCount, brickDimensionRatio);
+        level = 0;
     }
 
     public void findImpacts(GameLevels gameLevels){
@@ -45,11 +55,11 @@ public class GameLogicControl {
             ball.reverseY();
             // touches the bar?
         }
-        else if(impactWall(gameLevels.getBricks())){
+        else if(impactWall(getBricks())){
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
-            gameLevels.ReduceBrickCount();
+            ReduceBrickCount();
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -144,5 +154,42 @@ public class GameLogicControl {
 
     public void resetBallCount(){
         ballCount = 3;
+    }
+
+    public Brick[] getBricks() {
+        return bricks;
+    }
+
+    public int getBrickCount(){
+        return brickCount;
+    }
+
+    public void ReduceBrickCount() {
+        this.brickCount--;
+    }
+
+    public void wallReset(){
+        for(Brick b : bricks)
+            b.repair();
+        brickCount = bricks.length;
+        setBallCount(3);
+    }
+
+    public Brick makeBrick(Point point, Dimension size, String type){
+        BrickFactory brickFactory = new BrickFactory();
+        return brickFactory.getBricks(type, size, point);
+    }
+
+    public boolean isDone(){
+        return brickCount == 0;
+    }
+
+    public void nextLevel(){
+        bricks = levels[level++];
+        this.brickCount = bricks.length;
+    }
+
+    public boolean hasLevel(){
+        return level < levels.length;
     }
 }

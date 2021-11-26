@@ -134,7 +134,7 @@ public class PauseMenu implements MouseListener, MouseMotionListener {
         else if(restartButtonRect.contains(p)){
             message = "Restarting Game...";
             gameLogic.ballReset();
-            gameLevels.wallReset();
+            gameLogic.wallReset();
             showPauseMenu = false;
             owner.repaint();
         }
