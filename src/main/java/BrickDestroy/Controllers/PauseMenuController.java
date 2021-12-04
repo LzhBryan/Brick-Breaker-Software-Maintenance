@@ -14,15 +14,15 @@ import javafx.stage.Stage;
 public class PauseMenuController {
 
     @FXML
+    public Button restartButton;
+    @FXML
     private Button exitButton;
-
     @FXML
     private Button continueButton;
 
     private Stage stage;
     private GameLogicControl gameLogic;
     private GameBoard gameBoard;
-    private Stage pauseMenuStage;
     private GraphicsContext gc;
 
     public void initModel(Stage stage, GameLogicControl gameLogic, GameBoard gameBoard, GraphicsContext gc){
@@ -34,20 +34,15 @@ public class PauseMenuController {
 
     @FXML
     protected void resume(MouseEvent event){
-        pauseMenuStage = (Stage) exitButton.getScene().getWindow();
-        pauseMenuStage.close();
-        stage.getScene().getRoot().setEffect(null);
+        closeStage((Stage) exitButton.getScene().getWindow());
     }
 
     @FXML
     public void restart(MouseEvent event){
-        gameBoard.setMessage("Restarting Game...");
         gameLogic.wallReset();
         gameLogic.ballReset();
-        pauseMenuStage = (Stage) exitButton.getScene().getWindow();
-        pauseMenuStage.close();
-        stage.getScene().getRoot().setEffect(null);
-        gameBoard.paint(gc);
+        gameBoard.updateMessage("Restarting Game...");
+        closeStage((Stage) exitButton.getScene().getWindow());
     }
 
     @FXML
@@ -56,11 +51,13 @@ public class PauseMenuController {
     }
 
     @FXML
-    public void close(KeyEvent event){
-        if(event.getCode() == KeyCode.ESCAPE){
-            pauseMenuStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            pauseMenuStage.close();
-            stage.getScene().getRoot().setEffect(null);
-        }
+    public void closeScreen(KeyEvent event){
+        if(event.getCode() == KeyCode.ESCAPE)
+            closeStage((Stage)((Node) event.getSource()).getScene().getWindow());
+    }
+
+    public void closeStage(Stage stage){
+        stage.close();
+        this.stage.getScene().getRoot().setEffect(null);
     }
 }

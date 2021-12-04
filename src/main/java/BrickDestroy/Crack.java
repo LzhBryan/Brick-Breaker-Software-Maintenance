@@ -21,7 +21,8 @@ public class Crack {
 
     private static Random rnd;
     private Path crack;
-    private int crackDepth, steps;
+    private final int crackDepth;
+    private final int steps;
 
     public Crack(int crackDepth, int steps){
 
@@ -95,8 +96,8 @@ public class Crack {
             x = (i * w) + start.getX();
             y = (i * h) + start.getY() + randomInBounds(bound);
 
-            if(inMiddle(i,CRACK_SECTIONS,steps))
-                y += jumps(jump,JUMP_PROBABILITY);
+            if(inMiddle(i, steps))
+                y += jumps(jump);
 
             path.getElements().add(new LineTo(x,y));
         }
@@ -110,16 +111,16 @@ public class Crack {
         return rnd.nextInt(n) - bound;
     }
 
-    private boolean inMiddle(int i,int steps,int divisions){
-        int low = (steps / divisions);
+    private boolean inMiddle(int i, int divisions){
+        int low = (Crack.CRACK_SECTIONS / divisions);
         int up = low * (divisions - 1);
 
         return  (i > low) && (i < up);
     }
 
-    private int jumps(int bound,double probability){
+    private int jumps(int bound){
 
-        if(rnd.nextDouble() > probability)
+        if(rnd.nextDouble() > Crack.JUMP_PROBABILITY)
             return randomInBounds(bound);
         return  0;
 
@@ -130,15 +131,15 @@ public class Crack {
         Point2D out = new Point2D(0,0);
         int pos;
 
-        switch(direction){
-            case HORIZONTAL:
-                pos = rnd.nextInt((int)(to.getX() - from.getX())) + (int)from.getX();
+        switch (direction) {
+            case HORIZONTAL -> {
+                pos = rnd.nextInt((int) (to.getX() - from.getX())) + (int) from.getX();
                 out = new Point2D(pos, to.getY());
-                break;
-            case VERTICAL:
-                pos = rnd.nextInt((int) (to.getY() - from.getY()) ) + (int) from.getY();
+            }
+            case VERTICAL -> {
+                pos = rnd.nextInt((int) (to.getY() - from.getY())) + (int) from.getY();
                 out = new Point2D(to.getX(), pos);
-                break;
+            }
         }
         return out;
     }

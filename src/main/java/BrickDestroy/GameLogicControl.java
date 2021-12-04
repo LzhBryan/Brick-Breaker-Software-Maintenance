@@ -6,17 +6,17 @@ import javafx.scene.shape.Rectangle;
 import java.util.Random;
 
 public class GameLogicControl {
-    private Random rnd;
-    private Rectangle area;
-    Ball ball;
-    Player player;
-    private Point2D startPoint;
-    private int ballCount;
+    private final Random rnd;
+    private final Rectangle area;
+    private final Player player;
+    private final Point2D startPoint;
+    private final GameLevels gameLevels;
+    private Ball ball;
+    private Brick[] bricks;
     private boolean ballLost;
-    private GameLevels gameLevels;
-    Brick[] bricks;
-    private Brick[][] levels;
-    private int level, brickCount;
+    private int brickCount;
+    private int ballCount;
+    private int level;
 
     public GameLogicControl(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point2D ballPos){
         startPoint = new Point2D(ballPos.getX(), ballPos.getY());
@@ -24,86 +24,84 @@ public class GameLogicControl {
         ballLost = false;
         rnd = new Random();
 
-        //create ball
         makeBall(ballPos);
         int speedX,speedY;
 
-        do{
-            // intial value = 5
-            speedX = rnd.nextInt(5) - 2;
-            // velocity
-        }while(speedX == 0);
-        do{
-            //initial value = 3
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
-
+        speedX = 9;
+        speedY = -7;
+//        speedX = randomizeSpeed(5, -2);
+//        speedY = randomizeSpeed(3, 0);
         ball.setSpeed(speedX,speedY);
-
         player = new Player(ballPos,150,10, drawArea);
         this.area = drawArea;
 
-        gameLevels = new GameLevels(this, drawArea,brickCount,lineCount, brickDimensionRatio);
-        levels = gameLevels.makeLevels();
+        gameLevels = new GameLevels(this, drawArea, brickCount, lineCount, brickDimensionRatio);
         level = 0;
     }
 
-    public void findImpacts(){
-        if(player.impact(ball)){
+    private void makeBall(Point2D ballPos){
+        ball = new RubberBall(ballPos);
+    }
+
+    public void detectCollision(){
+
+        if(player.collideBall(ball))
             ball.reverseY();
-            // touches the bar?
-        }
-        else if(impactWall()){
-            //*for efficiency reverse is done into method impactWall
-              //because for every brick program checks for horizontal and vertical impacts
-             //*
+
+        else if(collideBrickWall())
             ReduceBrickCount();
-        }
-        else if(impactBorder()) {
+
+        else if(collideBorder())
             ball.reverseX();
-            // touches the horizontal side of the border?
-        }
-        else if(ball.getPosition().getY() < area.getY()){
+
+        else if(collideTopBorder())
             ball.reverseY();
-            // touches the ceiling?
-        }
-        else if(ball.getPosition().getY() > area.getY() + area.getHeight()){
+
+        else if(ballFalls()){
             ballCount--;
             ballLost = true;
-            // ball falls?
         }
     }
 
-    public boolean impactWall(){
-        for(Brick b : bricks){
-            switch(b.findImpact(ball)) {
-                //Vertical Impact
-                case Brick.UP_IMPACT:
-                    ball.reverseY();
-                    return b.setImpact(ball.down, Crack.UP);
-                case Brick.DOWN_IMPACT:
-                    ball.reverseY();
-                    return b.setImpact(ball.up, Crack.DOWN);
+    public boolean collideBrickWall(){
 
-                //Horizontal Impact
-                case Brick.LEFT_IMPACT:
+        for(Brick brick : bricks){
+            boolean isCement = brick.getBrickName().equalsIgnoreCase("Cement Brick");
+
+            switch (brick.findImpact(ball)) {
+                case Brick.UP_IMPACT -> {
+                    ball.reverseY();
+                    return isCement ? brick.setImpact(ball.getDown(), Crack.UP) : brick.setImpact();
+                }
+                case Brick.DOWN_IMPACT -> {
+                    ball.reverseY();
+                    return isCement ? brick.setImpact(ball.getUp(), Crack.DOWN) : brick.setImpact();
+                }
+
+                case Brick.LEFT_IMPACT -> {
                     ball.reverseX();
-                    return b.setImpact(ball.right, Crack.RIGHT);
-                case Brick.RIGHT_IMPACT:
+                    return isCement ? brick.setImpact(ball.getRight(), Crack.RIGHT) : brick.setImpact();
+                }
+                case Brick.RIGHT_IMPACT -> {
                     ball.reverseX();
-                    return b.setImpact(ball.left, Crack.LEFT);
+                    return isCement ? brick.setImpact(ball.getLeft(), Crack.LEFT) : brick.setImpact();
+                }
             }
         }
         return false;
     }
 
-    public boolean impactBorder(){
+    public boolean collideBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
-    private void makeBall(Point2D ballPos){
-        ball = new RubberBall(ballPos);
+    public boolean ballFalls() {
+        return ball.getPosition().getY() > area.getY() + area.getHeight();
+    }
+
+    public boolean collideTopBorder() {
+        return ball.getPosition().getY() < area.getY();
     }
 
     public int getBallCount(){
@@ -122,18 +120,15 @@ public class GameLogicControl {
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
         int speedX,speedY;
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
-
+        speedX = 9;
+        speedY = -7;
+//        speedX = randomizeSpeed(5, -2);
+//        speedY = randomizeSpeed(3, 0);
         ball.setSpeed(speedX,speedY);
         ballLost = false;
     }
 
-    public void move(){
+    public void startMovement(){
         player.move();
         ball.move();
     }
@@ -183,11 +178,28 @@ public class GameLogicControl {
     }
 
     public void nextLevel(){
-        bricks = levels[level++];
+        bricks = gameLevels.getLevels()[level++];
         this.brickCount = bricks.length;
     }
 
     public boolean hasLevel(){
-        return level < levels.length;
+        return level < gameLevels.getLevels().length;
+    }
+
+    public Ball getBall() {
+        return ball;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int randomizeSpeed(int range, int constant){
+        int speed;
+        do{
+            speed = rnd.nextInt(range) + constant;
+        }while(speed == 0);
+
+        return speed;
     }
 }

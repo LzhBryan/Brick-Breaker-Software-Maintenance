@@ -14,10 +14,10 @@ public class RubberBall extends Ball{
     }
 
     @Override
-    protected Circle makeBall(Point2D center, int radiusA, int radiusB) {
-        double x = center.getX() - (radiusA / 2);
-        double y = center.getY() - (radiusB / 2);
+    protected Circle makeBall(Point2D center, int radius) {
+        double x = center.getX() - (double) (radius / 2);
+        double y = center.getY() - (double) (radius / 2);
 
-        return new Circle(x,y,radiusA);
+        return new Circle(x,y,radius);
     }
 }

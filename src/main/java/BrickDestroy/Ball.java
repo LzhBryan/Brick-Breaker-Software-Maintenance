@@ -3,67 +3,67 @@ package BrickDestroy;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 
-abstract public class Ball{
+abstract public class Ball implements Mobile{
 
-    private Shape ballFace;
-    private Point2D center;
-    Point2D up, down, left, right;
-    private Color border, inner;
+    private Circle ballFace;
+    private Point2D centerPosition;
+    private Point2D up, down, left, right;
+    private final Color borderColor;
+    private final Color innerColor;
     private int speedX;
     private int speedY;
-    private int radius;
+    private final int radius;
 
-    public Ball(Point2D center, int radiusA, Color inner, Color border){
-        this.center = center;
-        this.radius = radiusA;
+    public Ball(Point2D centerPosition, int radius, Color innerColor, Color borderColor){
+        this.centerPosition = centerPosition;
+        this.radius = radius;
 
         up = new Point2D(0,0);
         down = new Point2D(0,0);
         left = new Point2D(0,0);
         right = new Point2D(0,0);
 
-        ballFace = makeBall(center, radiusA, radiusA);
+        ballFace = makeBall(this.centerPosition, radius);
 
-        this.border = border;
-        this.inner = inner;
+        this.borderColor = borderColor;
+        this.innerColor = innerColor;
 
         speedX = 0;
         speedY = 0;
     }
 
-    protected abstract Circle makeBall(Point2D center, int radiusA, int radiusB);
+    protected abstract Circle makeBall(Point2D center, int radius);
 
     public Circle createCircle(){
-        Circle tmp = (Circle) ballFace;
-        double radius = tmp.getRadius();
+        Circle circle = ballFace;
 
-        tmp.setCenterX(getUpperLeftX());
-        tmp.setCenterY(getUpperLeftY());
-        tmp.setRadius(radius);
+        circle.setCenterX(getUpperLeftX());
+        circle.setCenterY(getUpperLeftY());
+        circle.setRadius(radius);
 
-        return tmp;
+        return circle;
     }
 
+    @Override
     public void move(){
-        center = new Point2D(center.getX() + speedX, center.getY() + speedY);
-        Circle temp = createCircle();
-        ballFace = temp;
-        setPoints(temp.getRadius(), temp.getRadius());
+        centerPosition = new Point2D(centerPosition.getX() + speedX, centerPosition.getY() + speedY);
+        Circle circle = createCircle();
+        ballFace = circle;
+        setPoints(circle.getRadius(), circle.getRadius());
     }
 
-    public void setSpeed(int x,int y){
-        speedX = x;
-        speedY = y;
+    public void setSpeed(int speedX,int speedY){
+        this.speedX = speedX;
+        this.speedY = speedY;
     }
 
-    public void setXSpeed(int s){
-        speedX = s;
+    public void setXSpeed(int speedX){
+        this.speedX = speedX;
     }
 
-    public void setYSpeed(int s){
-        speedY = s;
+    public void setYSpeed(int speedY){
+        this.speedY = speedY;
     }
 
     public void reverseX(){
@@ -75,39 +75,28 @@ abstract public class Ball{
     }
 
     public Color getBorderColor(){
-        return border;
+        return borderColor;
     }
 
     public Color getInnerColor(){
-        return inner;
+        return innerColor;
     }
 
     public Point2D getPosition(){
-        return center;
+        return centerPosition;
     }
 
-    public Shape getBallFace(){
-        return ballFace;
-    }
-
-    public void moveTo(Point2D p){
-        center = p;
+    @Override
+    public void moveTo(Point2D point){
+        centerPosition = point;
         ballFace = createCircle();
     }
 
     private void setPoints(double width,double height){
-        up = new Point2D(center.getX(), center.getY() - (height/2));
-        down = new Point2D(center.getX(), center.getY() + (height/2));
-        left = new Point2D(center.getX() - (width/2), center.getY());
-        right = new Point2D(center.getX() + (width/2), center.getY());
-    }
-
-    public int getSpeedX(){
-        return speedX;
-    }
-
-    public int getSpeedY(){
-        return speedY;
+        up = new Point2D(centerPosition.getX(), centerPosition.getY() - (height/2));
+        down = new Point2D(centerPosition.getX(), centerPosition.getY() + (height/2));
+        left = new Point2D(centerPosition.getX() - (width/2), centerPosition.getY());
+        right = new Point2D(centerPosition.getX() + (width/2), centerPosition.getY());
     }
 
     public int getRadius() {
@@ -115,11 +104,27 @@ abstract public class Ball{
     }
 
     public double getUpperLeftX() {
-        return center.getX() - (radius/2);
+        return centerPosition.getX() - (double) (radius/2);
     }
 
     public double getUpperLeftY() {
-        return center.getY() - (radius/2);
+        return centerPosition.getY() - (double) (radius/2);
+    }
+
+    public Point2D getUp() {
+        return up;
+    }
+
+    public Point2D getDown() {
+        return down;
+    }
+
+    public Point2D getLeft() {
+        return left;
+    }
+
+    public Point2D getRight() {
+        return right;
     }
 }
 

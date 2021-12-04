@@ -3,20 +3,19 @@ package BrickDestroy;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
-public class Player {
+public class Player implements Mobile{
     public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
     public static final Color INNER_COLOR = Color.GREEN;
-    private static final int DEF_MOVE_AMOUNT = 5;
+    private static final int DEF_MOVE_AMOUNT = 10; // it was 5
 
-    private Rectangle playerFace;
+    private final Rectangle playerFace;
     private Point2D ballPoint;
+    private final int min;
+    private final int max;
+    private final int height;
+    private final int width;
     private int moveAmount;
-    private int min;
-    private int max;
-    private int height;
-    private int width;
 
     public Player(Point2D ballPoint,int width,int height,Rectangle container) {
         this.ballPoint = ballPoint;
@@ -29,19 +28,19 @@ public class Player {
     }
 
     private Rectangle makeRectangle(int width,int height){
-        Point2D p = new Point2D((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
-        return new Rectangle(p.getX(), p.getY(), width, height);
+        Point2D playerPosition = new Point2D((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
+        return new Rectangle(playerPosition.getX(), playerPosition.getY(), width, height);
     }
 
-    public boolean impact(Ball b){
-        return playerFace.contains(b.getPosition()) && playerFace.contains(b.down) ;
+    public boolean collideBall(Ball b){
+        return playerFace.contains(b.getPosition()) && playerFace.contains(b.getDown()) ;
     }
 
+    @Override
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
             return;
-
         ballPoint = new Point2D(x, ballPoint.getY());
         playerFace.setX(ballPoint.getX() - playerFace.getWidth()/2);
     }
@@ -50,7 +49,7 @@ public class Player {
         moveAmount = -DEF_MOVE_AMOUNT;
     }
 
-    public void movRight(){
+    public void moveRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
 
@@ -58,13 +57,10 @@ public class Player {
         moveAmount = 0;
     }
 
-    public Shape getPlayerFace(){
-        return  playerFace;
-    }
-
-    public void moveTo(Point2D p){
-        ballPoint = p;
-        playerFace.setX(ballPoint.getX() - (int)playerFace.getWidth()/2);
+    @Override
+    public void moveTo(Point2D position){
+        ballPoint = position;
+        playerFace.setX(ballPoint.getX() - playerFace.getWidth() /2);
         playerFace.setY(ballPoint.getY());
     }
 

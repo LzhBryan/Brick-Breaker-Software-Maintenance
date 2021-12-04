@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class ClayBrick extends Brick{
+
     private static final String NAME = "Clay Brick";
     private static final Color DEF_INNER = Color.rgb(178, 34, 34).darker();
     private static final Color DEF_BORDER = Color.GRAY;
@@ -24,12 +25,11 @@ public class ClayBrick extends Brick{
 
     @Override
     public Shape getBrick() {
-        return super.brickFace;
+        return super.getBrickFace();
     }
 
     @Override
     public Path getPath() {
         return null;
     }
-
 }

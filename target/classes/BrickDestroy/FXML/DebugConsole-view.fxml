@@ -9,24 +9,39 @@
 
 <DialogPane prefHeight="59.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.DebugConsoleController">
    <content>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="450.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" onMouseClicked="#skipLevels" prefHeight="26.0" prefWidth="223.0" text="Skip Level" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onMouseClicked="#resetBalls" prefHeight="26.0" prefWidth="234.0" text="Reset ball" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Slider fx:id="ballXspeed" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="-4.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" GridPane.rowIndex="4" />
-            <Slider fx:id="ballYspeed" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="-4.0" minorTickCount="0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-         </children>
-      </GridPane>
+       <GridPane maxHeight="-Infinity" maxWidth="-Infinity"
+                 minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
+                 prefWidth="450.0">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                  prefWidth="100.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                  prefWidth="100.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0"
+                               vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0"
+                               vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0"
+                               vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0"
+                               vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0"
+                               vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <Button mnemonicParsing="false" onMouseClicked="#skipLevels"
+                   prefHeight="26.0" prefWidth="223.0" text="Skip Level"
+                   GridPane.rowIndex="1"/>
+           <Button mnemonicParsing="false" onMouseClicked="#resetBalls"
+                   prefHeight="26.0" prefWidth="234.0" text="Reset ball"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+           <Slider fx:id="ballXSpeed" blockIncrement="1.0" majorTickUnit="1.0"
+                   max="4.0" min="-4.0" minorTickCount="0" showTickMarks="true"
+                   snapToTicks="true" GridPane.rowIndex="4"/>
+           <Slider fx:id="ballYSpeed" blockIncrement="1.0" majorTickUnit="1.0"
+                   max="4.0" min="-4.0" minorTickCount="0" showTickMarks="true"
+                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+       </GridPane>
    </content>
 </DialogPane>
