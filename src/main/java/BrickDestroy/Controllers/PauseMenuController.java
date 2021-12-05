@@ -1,10 +1,8 @@
 package BrickDestroy.Controllers;
 
-import BrickDestroy.GameBoard;
-import BrickDestroy.GameLogicControl;
+import BrickDestroy.Models.PauseMenuModel;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -20,34 +18,28 @@ public class PauseMenuController {
     @FXML
     private Button continueButton;
 
-    private Stage stage;
-    private GameLogicControl gameLogic;
-    private GameBoard gameBoard;
-    private GraphicsContext gc;
+    private PauseMenuModel pauseMenuModel;
 
-    public void initModel(Stage stage, GameLogicControl gameLogic, GameBoard gameBoard, GraphicsContext gc){
-        this.stage = stage;
-        this.gameLogic = gameLogic;
-        this.gameBoard = gameBoard;
-        this.gc = gc;
+    public void initModel(PauseMenuModel pauseMenuModel){
+        this.pauseMenuModel = pauseMenuModel;
     }
 
     @FXML
     protected void resume(MouseEvent event){
-        closeStage((Stage) exitButton.getScene().getWindow());
+        closeStage((Stage) continueButton.getScene().getWindow());
     }
 
     @FXML
     public void restart(MouseEvent event){
-        gameLogic.wallReset();
-        gameLogic.ballReset();
-        gameBoard.updateMessage("Restarting Game...");
-        closeStage((Stage) exitButton.getScene().getWindow());
+        pauseMenuModel.getGameLogic().wallReset();
+        pauseMenuModel.getGameLogic().ballReset();
+        pauseMenuModel.getGameBoard().updateMessage("Restarting Game...");
+        closeStage((Stage) restartButton.getScene().getWindow());
     }
 
     @FXML
     public void exit(MouseEvent event){
-        stage.close();
+        pauseMenuModel.getPreviousStage().close();
     }
 
     @FXML
@@ -58,6 +50,6 @@ public class PauseMenuController {
 
     public void closeStage(Stage stage){
         stage.close();
-        this.stage.getScene().getRoot().setEffect(null);
+        pauseMenuModel.getPreviousStage().getScene().getRoot().setEffect(null);
     }
 }

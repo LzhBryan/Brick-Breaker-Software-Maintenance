@@ -1,18 +1,10 @@
 package BrickDestroy.Controllers;
 
-import BrickDestroy.DebugConsole;
-import BrickDestroy.GameBoard;
-import BrickDestroy.GameLogicControl;
+import BrickDestroy.Models.DebugConsoleModel;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,31 +15,27 @@ public class DebugConsoleController implements Initializable {
     @FXML
     private Slider ballYSpeed;
 
-    private GameLogicControl gameLogic;
-    private Stage previousStage;
-    private FXMLLoader loader;
+    private DebugConsoleModel debugModel;
+
+    public void initModel(DebugConsoleModel debugModel){
+        this.debugModel = debugModel;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ballXSpeed.valueProperty().addListener((observableValue, number, t1) ->
-                gameLogic.setBallXSpeed((int) ballXSpeed.getValue()));
+        ballXSpeed.valueProperty().addListener(e ->
+                debugModel.getGameLogic().setBallXSpeed((int) ballXSpeed.getValue()));
 
-        ballYSpeed.valueProperty().addListener((observableValue, number, t1) ->
-                gameLogic.setBallYSpeed((int) ballYSpeed.getValue()));
-    }
-
-    public void initModel(GameLogicControl gameLogic, Stage previousStage, FXMLLoader loader){
-        this.gameLogic = gameLogic;
-        this.previousStage = previousStage;
-        this.loader = loader;
+        ballYSpeed.valueProperty().addListener(e ->
+                debugModel.getGameLogic().setBallYSpeed((int) ballYSpeed.getValue()));
     }
 
     public void skipLevels(MouseEvent event) {
-        if (gameLogic.hasLevel())
-            gameLogic.nextLevel();
+        if (debugModel.getGameLogic().hasLevel())
+            debugModel.getGameLogic().nextLevel();
     }
 
     public void resetBalls(MouseEvent event) {
-        gameLogic.resetBallCount();
+        debugModel.getGameLogic().resetBallCount();
     }
 }

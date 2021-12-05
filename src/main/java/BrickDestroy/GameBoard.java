@@ -2,6 +2,8 @@ package BrickDestroy;
 
 import BrickDestroy.Controllers.DebugConsoleController;
 import BrickDestroy.Controllers.PauseMenuController;
+import BrickDestroy.Models.DebugConsoleModel;
+import BrickDestroy.Models.PauseMenuModel;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -29,7 +31,7 @@ public class GameBoard {
     private final Canvas canvas;
     private final GraphicsContext graphicsContext;
     private String gameMessage;
-    private boolean gamePause = false;
+    private boolean gamePausing;
     private boolean gameRunning;
 
     public GameBoard(){
@@ -41,6 +43,7 @@ public class GameBoard {
         canvas.setFocusTraversable(true);
 
         gameRunning = false;
+        gamePausing = false;
         isKeyPressed(canvas);
         isKeyReleased(canvas);
         paint(graphicsContext);
@@ -180,12 +183,12 @@ public class GameBoard {
             else if (e.getCode() == KeyCode.SPACE){
                 userInput = "SPACE";
                     if(gameRunning){
-                        if (gamePause) {
-                            gamePause = false;
+                        if (gamePausing) {
+                            gamePausing = false;
                             animationTimer.start();
                         }
                         else {
-                            gamePause = true;
+                            gamePausing = true;
                             animationTimer.stop();
                         }
                     }
@@ -228,8 +231,9 @@ public class GameBoard {
             e.printStackTrace();
         }
         debugPanelStage.show();
+        DebugConsoleModel debugModel = new DebugConsoleModel(gameLogic);
         DebugConsoleController debugConsoleController = loader.getController();
-        debugConsoleController.initModel(gameLogic, previousStage, loader);
+        debugConsoleController.initModel(debugModel);
     }
 
     public void showPauseMenu(Stage previousStage) {
@@ -238,7 +242,7 @@ public class GameBoard {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/PauseMenu-view.fxml"));
         Stage pauseMenuStage = new Stage(StageStyle.TRANSPARENT);
         pauseMenuStage.setX(previousStage.getX());
-        pauseMenuStage.setX(previousStage.getY());
+        pauseMenuStage.setY(previousStage.getY());
         pauseMenuStage.initOwner(previousStage);
         pauseMenuStage.initModality(Modality.APPLICATION_MODAL);
         pauseMenuStage.setOpacity(0.65);
@@ -248,7 +252,8 @@ public class GameBoard {
             e.printStackTrace();
         }
         pauseMenuStage.show();
+        PauseMenuModel pauseMenuModel = new PauseMenuModel(gameLogic, previousStage, this);
         PauseMenuController pauseMenuController = loader.getController();
-        pauseMenuController.initModel(previousStage, gameLogic, this, graphicsContext);
+        pauseMenuController.initModel(pauseMenuModel);
     }
 }
