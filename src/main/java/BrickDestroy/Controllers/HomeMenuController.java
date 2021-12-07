@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -25,7 +26,8 @@ public class HomeMenuController {
     private Button exitMenuButton;
 
     public void switchToGameScreen(MouseEvent event) {
-        GameBoardModel gameBoardModel = new GameBoardModel();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        GameBoardModel gameBoardModel = new GameBoardModel(stage);
         GameLogic gameLogic;
         gameLogic = new GameLogic(new Rectangle(0,0,
                 GameBoardModel.DEF_WIDTH, GameBoardModel.DEF_HEIGHT),
@@ -33,15 +35,26 @@ public class HomeMenuController {
                 (double) 6/2, new Point2D(300,430));
         GameBoardView gameBoardView = new GameBoardView(gameLogic);
         GameBoardController gameBoardController = new GameBoardController(gameBoardModel, gameBoardView, gameLogic);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(gameBoardView.getScene());
     }
 
     public void showInfoMenu(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Info-view.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(loader.load()));
+        currentStage.show();
+        InfoController infoController = loader.getController();
+        infoController.receiveStage(currentStage);
+    }
+
+    public void showLeaderboard(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Scoreboard-view.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(loader.load()));
+        newStage.setTitle("ScoreBoard");
+        newStage.show();
+        ScoreboardController scoreboardController = loader.getController();
+        scoreboardController.readScorelist();
     }
 
     public void exit(MouseEvent event) {

@@ -1,5 +1,10 @@
 package BrickDestroy.Models;
 
+import javafx.collections.ObservableList;
+import javafx.stage.Stage;
+
+import java.util.ArrayList;
+
 public class GameBoardModel {
 
     public static final double DEF_WIDTH = 600;
@@ -9,8 +14,9 @@ public class GameBoardModel {
     private String gameMessage;
     private boolean gamePausing;
     private boolean gameRunning;
+    private Stage gameStage;
 
-    public GameBoardModel(){
+    public GameBoardModel(Stage gameStage){
         this.userInput = "";
         this.gameMessage = "";
         this.gameRunning = false;
@@ -43,5 +49,9 @@ public class GameBoardModel {
 
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
+    }
+
+    public Stage getGameStage() {
+        return gameStage;
     }
 }

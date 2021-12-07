@@ -13,7 +13,7 @@
          <Font name="System Bold" size="40.0" />
       </font>
    </Label>
-   <Button fx:id="startMenuButton" alignment="BASELINE_LEFT" cancelButton="true" ellipsisString="" graphicTextGap="10.0" layoutX="235.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#switchToGameScreen" prefHeight="64.0" prefWidth="146.0" text="Play">
+   <Button fx:id="startMenuButton" alignment="BASELINE_LEFT" cancelButton="true" ellipsisString="" graphicTextGap="10.0" layoutX="239.0" layoutY="140.0" mnemonicParsing="false" onMouseClicked="#switchToGameScreen" prefHeight="64.0" prefWidth="146.0" text="Play">
       <font>
          <Font name="Monospaced Regular" size="23.0" />
       </font>
@@ -25,12 +25,17 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="exitMenuButton" layoutX="131.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="53.0" prefWidth="94.0" text="Exit">
+   <Button fx:id="exitMenuButton" layoutX="66.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="53.0" prefWidth="94.0" text="Exit">
       <font>
          <Font name="Monospaced Regular" size="23.0" />
       </font>
    </Button>
-   <Button fx:id="InfoButton" layoutX="401.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#showInfoMenu" prefHeight="46.0" prefWidth="94.0" text="Info">
+   <Button fx:id="InfoButton" layoutX="464.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#showInfoMenu" prefHeight="46.0" prefWidth="94.0" text="Info">
+      <font>
+         <Font name="Monospaced Regular" size="23.0" />
+      </font>
+   </Button>
+   <Button layoutX="217.0" layoutY="239.0" mnemonicParsing="false" onMouseClicked="#showLeaderboard" prefHeight="50.0" prefWidth="190.0" text="Leaderboard">
       <font>
          <Font name="Monospaced Regular" size="23.0" />
       </font>

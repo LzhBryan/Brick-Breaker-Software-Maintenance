@@ -4,6 +4,7 @@ import BrickDestroy.GameLogic;
 import BrickDestroy.Models.DebugConsoleModel;
 import BrickDestroy.Models.GameBoardModel;
 import BrickDestroy.Models.PauseMenuModel;
+import BrickDestroy.Models.ScoreModel;
 import BrickDestroy.Player;
 import BrickDestroy.Views.GameBoardView;
 import javafx.animation.AnimationTimer;
@@ -16,7 +17,8 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.io.IOException;
+
+import java.io.*;
 
 public class GameBoardController {
 
@@ -50,6 +52,7 @@ public class GameBoardController {
                     levelIncrement();
 
                 handlePlayerMovement(gameLogic.getPlayer());
+
             }
             lastUpdate = currentNanoTime;
         }
@@ -59,14 +62,16 @@ public class GameBoardController {
         gameBoardView.paint(gameBoardView.getGraphicsContext());
         gameLogic.startMovement();
         gameLogic.detectCollision();
-        displayMessage(String.format("Bricks: %d Balls %d",
-                gameLogic.getBrickCount(), gameLogic.getBallCount()));
+        displayMessage(String.format("Bricks: %d Balls %d Score %d", gameLogic.getBrickCount(),
+                gameLogic.getBallCount(), gameLogic.getScore()));
     }
 
     public void handleBallLost(){
         if(gameLogic.ballEnd()){
-            gameLogic.wallReset();
+            //gameLogic.wallReset();
+            levelIncrement();
             displayMessage("Game over");
+            //scorePopup(gameBoardModel.getGameStage());
         }
         gameLogic.ballReset();
         animationTimer.stop();
@@ -74,6 +79,7 @@ public class GameBoardController {
     }
 
     public void levelIncrement(){
+        scorePopup(gameBoardModel.getGameStage());
         if (gameLogic.hasLevel()) {
             gameLogic.ballReset();
             gameLogic.wallReset();
@@ -186,4 +192,22 @@ public class GameBoardController {
         PauseMenuController pauseMenuController = loader.getController();
         pauseMenuController.initModel(pauseMenuModel);
     }
+
+    public void scorePopup(Stage currentStage){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/ScorePopup-view.fxml"));
+        Stage scorePopup = new Stage();
+        scorePopup.initOwner(currentStage);
+        scorePopup.initModality(Modality.APPLICATION_MODAL);
+        try {
+            scorePopup.setScene(new Scene(loader.load()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        scorePopup.setTitle("Score for this round!");
+        scorePopup.show();
+        ScoreModel scoreModel = new ScoreModel(gameLogic);
+        ScoreController scoreController = loader.getController();
+        scoreController.initModel(scoreModel);
+    }
+
 }

@@ -44,6 +44,7 @@ public class Player implements Mobile{
             return;
         ballPoint = new Point2D(x, ballPoint.getY());
         playerFace.setX(ballPoint.getX() - playerFace.getWidth()/2);
+        playerFace.setY(ballPoint.getY());
     }
 
     public void moveLeft(){

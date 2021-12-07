@@ -40,7 +40,7 @@ public class GameBoardView {
 
     public void drawString(String gameMessage, GraphicsContext gc){
         gc.setFill(Color.BLUE);
-        gc.fillText(gameMessage, 250, 225);
+        gc.fillText(gameMessage, 230, 225);
     }
 
     public void drawBall(Ball ball, GraphicsContext gc){

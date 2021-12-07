@@ -17,6 +17,7 @@ public class GameLogic {
     private int brickCount;
     private int ballCount;
     private int level;
+    private int score;
 
     public GameLogic(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point2D ballPos){
         startPoint = new Point2D(ballPos.getX(), ballPos.getY());
@@ -37,10 +38,12 @@ public class GameLogic {
 
         gameLevels = new GameLevels(this, drawArea, brickCount, lineCount, brickDimensionRatio);
         level = 0;
+        score = 0;
     }
 
     private void makeBall(Point2D ballPos){
-        ball = new RubberBall(ballPos);
+        BallFactory ballFactory = new BallFactory();
+        ball = ballFactory.makeBall("Rubber Ball", ballPos);
     }
 
     // collision
@@ -49,8 +52,10 @@ public class GameLogic {
         if(player.collideBall(ball))
             ball.reverseY();
 
-        else if(collideBrickWall())
+        else if(collideBrickWall()){
             ReduceBrickCount();
+            score++;
+        }
 
         else if(collideBorder())
             ball.reverseX();
@@ -92,26 +97,6 @@ public class GameLogic {
         return false;
     }
 
-    public final int findImpact(Ball b, Brick brick){
-        if(brick.isBroken())
-            return 0;
-
-        int out  = 0;
-        if(brick.getBrickFace().contains(b.getRight()))
-            out = Brick.LEFT_IMPACT;
-
-        else if(brick.getBrickFace().contains(b.getLeft()))
-            out = Brick.RIGHT_IMPACT;
-
-        else if(brick.getBrickFace().contains(b.getUp()))
-            out = Brick.DOWN_IMPACT;
-
-        else if(brick.getBrickFace().contains(b.getDown()))
-            out = Brick.UP_IMPACT;
-
-        return out;
-    }
-
     public boolean collideBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
@@ -132,14 +117,6 @@ public class GameLogic {
 
     public void setBallCount(int ballCount) {
         this.ballCount = ballCount;
-    }
-
-    public void reduceBallCount(){
-        this.ballCount--;
-    }
-
-    public void setBallLost(boolean ballLost) {
-        this.ballLost = ballLost;
     }
 
     public boolean isBallLost(){
@@ -233,7 +210,15 @@ public class GameLogic {
         return speed;
     }
 
-    public Rectangle getArea() {
-        return area;
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

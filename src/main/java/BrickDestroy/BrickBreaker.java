@@ -18,6 +18,7 @@ public class BrickBreaker extends Application {
         scene.getStylesheets().add(getClass().getResource("/CSS/HomeMenu.css").toExternalForm());
         primaryStage.setTitle("Brick Breaker");
         primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 
