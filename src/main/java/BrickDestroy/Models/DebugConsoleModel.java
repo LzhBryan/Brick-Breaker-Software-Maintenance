@@ -1,16 +1,16 @@
 package BrickDestroy.Models;
 
-import BrickDestroy.GameLogicControl;
+import BrickDestroy.GameLogic;
 
 public class DebugConsoleModel {
 
-    private final GameLogicControl gameLogic;
+    private final GameLogic gameLogic;
 
-    public DebugConsoleModel(GameLogicControl gameLogic){
+    public DebugConsoleModel(GameLogic gameLogic){
         this.gameLogic = gameLogic;
     }
 
-    public GameLogicControl getGameLogic() {
+    public GameLogic getGameLogic() {
         return gameLogic;
     }
 

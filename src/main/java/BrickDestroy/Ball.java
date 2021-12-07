@@ -74,6 +74,7 @@ abstract public class Ball implements Mobile{
         speedY *= -1;
     }
 
+    // model
     public Color getBorderColor(){
         return borderColor;
     }
@@ -85,7 +86,7 @@ abstract public class Ball implements Mobile{
     public Point2D getPosition(){
         return centerPosition;
     }
-
+    //
     @Override
     public void moveTo(Point2D point){
         centerPosition = point;
@@ -99,6 +100,7 @@ abstract public class Ball implements Mobile{
         right = new Point2D(centerPosition.getX() + (width/2), centerPosition.getY());
     }
 
+    // model
     public int getRadius() {
         return radius;
     }

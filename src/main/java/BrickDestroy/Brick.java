@@ -56,6 +56,7 @@ public abstract class Brick {
 
     public abstract Path getPath();
 
+
     public Color getBorderColor(){
         return borderColor;
     }

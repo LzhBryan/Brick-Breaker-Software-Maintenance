@@ -17,7 +17,7 @@ public class Player implements Mobile{
     private final int width;
     private int moveAmount;
 
-    public Player(Point2D ballPoint,int width,int height,Rectangle container) {
+    public Player(Point2D ballPoint, int width, int height, Rectangle container) {
         this.ballPoint = ballPoint;
         moveAmount = 0;
         playerFace = makeRectangle(width, height);
@@ -28,10 +28,11 @@ public class Player implements Mobile{
     }
 
     private Rectangle makeRectangle(int width,int height){
-        Point2D playerPosition = new Point2D((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
+        Point2D playerPosition = new Point2D((int)(ballPoint.getX() - (width / 2)), (int)ballPoint.getY());
         return new Rectangle(playerPosition.getX(), playerPosition.getY(), width, height);
     }
 
+    // player controller
     public boolean collideBall(Ball b){
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.getDown()) ;
     }
@@ -64,6 +65,7 @@ public class Player implements Mobile{
         playerFace.setY(ballPoint.getY());
     }
 
+    // player controller ends
     public double getUpperLeftX(){
         return playerFace.getX();
     }

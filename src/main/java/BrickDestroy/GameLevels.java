@@ -7,14 +7,14 @@ import javafx.scene.shape.Rectangle;
 public class GameLevels {
     private static final int LEVELS_COUNT = 4;
 
-    private final GameLogicControl gameLogic;
+    private final GameLogic gameLogic;
     private final Rectangle drawArea;
     private int brickCount;
     private final int lineCount;
     private final double brickSizeRatio;
     private final Brick[][] levels;
 
-    public GameLevels(GameLogicControl gameLogic, Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio ){
+    public GameLevels(GameLogic gameLogic, Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio ){
         this.gameLogic = gameLogic;
         this.drawArea = drawArea;
         this.brickCount = brickCnt;

@@ -8,4 +8,5 @@ module com.javafx.brick_javafx {
     opens BrickDestroy.Controllers to javafx.fxml;
     opens BrickDestroy.Models to javafx.fxml;
     exports BrickDestroy.Models;
+    exports BrickDestroy.Views;
 }

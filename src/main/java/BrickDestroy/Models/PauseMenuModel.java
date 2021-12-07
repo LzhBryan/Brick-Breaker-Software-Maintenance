@@ -1,22 +1,22 @@
 package BrickDestroy.Models;
 
-import BrickDestroy.GameBoard;
-import BrickDestroy.GameLogicControl;
+import BrickDestroy.GameLogic;
+import BrickDestroy.Views.GameBoardView;
 import javafx.stage.Stage;
 
 public class PauseMenuModel {
 
-    private final GameLogicControl gameLogic;
+    private final GameLogic gameLogic;
     private final Stage previousStage;
-    private final GameBoard gameBoard;
+    private final GameBoardView gameBoardView;
 
-    public PauseMenuModel(GameLogicControl gameLogic, Stage previousStage, GameBoard gameBoard){
+    public PauseMenuModel(GameLogic gameLogic, Stage previousStage, GameBoardView gameBoardView){
         this.gameLogic = gameLogic;
         this.previousStage = previousStage;
-        this.gameBoard = gameBoard;
+        this.gameBoardView = gameBoardView;
     }
 
-    public GameLogicControl getGameLogic() {
+    public GameLogic getGameLogic() {
         return gameLogic;
     }
 
@@ -24,7 +24,7 @@ public class PauseMenuModel {
         return previousStage;
     }
 
-    public GameBoard getGameBoard() {
-        return gameBoard;
+    public GameBoardView getGameBoardModel() {
+        return gameBoardView;
     }
 }

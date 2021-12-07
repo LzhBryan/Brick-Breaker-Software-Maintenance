@@ -33,7 +33,7 @@ public class PauseMenuController {
     public void restart(MouseEvent event){
         pauseMenuModel.getGameLogic().wallReset();
         pauseMenuModel.getGameLogic().ballReset();
-        pauseMenuModel.getGameBoard().updateMessage("Restarting Game...");
+        pauseMenuModel.getGameBoardModel().updateMessage("Restarting Game...");
         closeStage((Stage) restartButton.getScene().getWindow());
     }
 
