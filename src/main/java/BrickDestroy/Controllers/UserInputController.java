@@ -26,11 +26,9 @@ public class UserInputController {
             try (FileWriter fileWriter = new FileWriter("Score_list.txt", true);
                  BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                  PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
-
-                printWriter.printf("\n\t\t%s\t\t\t\t\t%d", username, gameLogic.getScore());
-
-                System.out.println("Data Successfully appended into file");
-                printWriter.flush();
+                 printWriter.printf("\n%s, %d", username, gameLogic.getScore());
+                 System.out.println("Data Successfully appended into file");
+                 printWriter.flush();
             }
         }
         Stage currentStage = (Stage) textField.getScene().getWindow();

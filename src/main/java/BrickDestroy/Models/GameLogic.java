@@ -47,16 +47,13 @@ public class GameLogic {
         ball = ballFactory.makeBall("Rubber Ball", ballPos);
     }
 
-    // collision
     public void detectCollision(){
 
         if(player.collideBall(ball))
             ball.reverseY();
 
-        else if(collideBrickWall()){
+        else if(collideBrickWall())
             ReduceBrickCount();
-            score++;
-        }
 
         else if(collideBorder())
             ball.reverseX();
@@ -77,19 +74,23 @@ public class GameLogic {
 
             switch (brick.findImpact(ball)) {
                 case Brick.UP_IMPACT -> {
+                    score += brickScore(brick);
                     ball.reverseY();
                     return isCement ? brick.setImpact(ball.getDown(), Crack.UP) : brick.setImpact();
                 }
                 case Brick.DOWN_IMPACT -> {
+                    score += brickScore(brick);
                     ball.reverseY();
                     return isCement ? brick.setImpact(ball.getUp(), Crack.DOWN) : brick.setImpact();
                 }
 
                 case Brick.LEFT_IMPACT -> {
+                    score += brickScore(brick);
                     ball.reverseX();
                     return isCement ? brick.setImpact(ball.getRight(), Crack.RIGHT) : brick.setImpact();
                 }
                 case Brick.RIGHT_IMPACT -> {
+                    score += brickScore(brick);
                     ball.reverseX();
                     return isCement ? brick.setImpact(ball.getLeft(), Crack.LEFT) : brick.setImpact();
                 }
@@ -110,7 +111,6 @@ public class GameLogic {
     public boolean collideTopBorder() {
         return ball.getPosition().getY() < area.getY();
     }
-    // end of collision
 
     public int getBallCount(){
         return ballCount;
@@ -155,7 +155,7 @@ public class GameLogic {
 
     public void resetBallCount(){
         ballCount = 3;
-    } // model.setBallCount = 3
+    }
 
     public Brick[] getBricks() {
         return bricks;
@@ -214,4 +214,18 @@ public class GameLogic {
     public int getScore() {
         return score;
     }
+
+    public int brickScore(Brick brick){
+        if(brick.getBrickName().equalsIgnoreCase("Clay Brick"))
+            return 1;
+
+        else if(brick.getBrickName().equalsIgnoreCase("Steel Brick"))
+            return 2;
+
+        else if(brick.getBrickName().equalsIgnoreCase("Cement Brick"))
+            return 3;
+
+        return 0;
+    }
+
 }

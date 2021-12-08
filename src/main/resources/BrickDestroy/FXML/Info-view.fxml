@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="313.0" prefWidth="626.0"
-            xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="BrickDestroy.Controllers.InfoController">
-   <TextArea editable="false" layoutX="142.0" layoutY="21.0" prefHeight="272.0"
-             prefWidth="406.0" promptText="ddd"
-             text="How to play:&#10;&#10;A - move Left&#10;&#10;D - move Right&#10;&#10;Spacebar - Start / Pause the game&#10;&#10;ALT + SHIFT + F1 - popup game settings">
-      <font>
-         <Font size="18.0"/>
-      </font>
-   </TextArea>
-   <ImageView fitHeight="45.0" fitWidth="58.0" layoutX="33.0" layoutY="14.0"
-              onMouseClicked="#returnHomeMenu" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../../CSS/backButton.png"/>
+<AnchorPane prefHeight="313.0" prefWidth="480.0" stylesheets="@../../CSS/Info.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.InfoController">
+   <ImageView fitHeight="45.0" fitWidth="58.0" layoutX="31.0" layoutY="14.0" onMouseClicked="#returnHomeMenu" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../CSS/backButton.png" />
    </ImageView>
+   <Label fx:id="how" layoutX="142.0" layoutY="19.0" prefHeight="39.0" prefWidth="241.0" text="How to play:">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label layoutX="162.0" layoutY="79.0" text="A - move Left" />
+   <Label layoutX="162.0" layoutY="124.0" text="D - move Right" />
+   <Label layoutX="162.0" layoutY="211.0" text="Spacebar - Start / Pause the game" />
+   <Label layoutX="162.0" layoutY="257.0" text="ALT + SHIFT + F1 - popup game settings" />
+   <Label layoutX="162.0" layoutY="166.0" text="F - Scoreboard" />
 </AnchorPane>

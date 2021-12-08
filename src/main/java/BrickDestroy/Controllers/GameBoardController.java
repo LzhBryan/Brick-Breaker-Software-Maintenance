@@ -192,6 +192,8 @@ public class GameBoardController {
     }
 
     public void scoreBoard(Stage currentStage){
+        animationTimer.stop();
+        gameBoardModel.setGamePausing(true);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Scoreboard-view.fxml"));
         Stage scoreboard = new Stage();
         scoreboard.initOwner(currentStage);

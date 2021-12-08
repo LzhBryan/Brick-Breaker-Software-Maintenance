@@ -8,13 +8,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.*;
 
 public class ScoreboardController {
 
     @FXML
     private ListView<String> scoreList;
+    @FXML
+    private ListView<String> username;
+
     private GameLogic gameLogic;
 
     public void init(GameLogic gameLogic){
@@ -22,16 +24,19 @@ public class ScoreboardController {
     }
 
     public void readScoreList() {
+        username.getItems().clear();
         scoreList.getItems().clear();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("Score_list.txt"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
-                scoreList.getItems().add(line);
+                String[] str = line.split(", ");
+                username.getItems().add(str[0]);
+                scoreList.getItems().add(str[1]);
                 line = bufferedReader.readLine();
             }
         } catch (FileNotFoundException e) {
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Score_list.txt"))) {
-                String fileContent = "\t\tExampleUser1\t\t\t0";
+                String fileContent = "\t\tExampleUser1,\t\t\t0";
                 try {
                     bufferedWriter.write(fileContent);
                 } catch (IOException ex) {
