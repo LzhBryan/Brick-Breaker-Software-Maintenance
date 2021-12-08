@@ -1,6 +1,5 @@
 package BrickDestroy.Models;
 
-import BrickDestroy.GameLogic;
 import BrickDestroy.Views.GameBoardView;
 import javafx.stage.Stage;
 

@@ -1,29 +1,27 @@
 package BrickDestroy.Controllers;
 
-import BrickDestroy.GameLogic;
+import BrickDestroy.Models.GameLogic;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class ScoreboardController {
 
     @FXML
     private ListView<String> scoreList;
-
-    private ArrayList<String> scorelist = new ArrayList<String>();
     private GameLogic gameLogic;
 
     public void init(GameLogic gameLogic){
         this.gameLogic = gameLogic;
     }
 
-    public void readScorelist() {
+    public void readScoreList() {
         scoreList.getItems().clear();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("Score_list.txt"))) {
             String line = bufferedReader.readLine();
@@ -48,15 +46,24 @@ public class ScoreboardController {
     }
 
     public void refresh(){
-        readScorelist();
+        readScoreList();
     }
 
     public void updateScoreboard(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Userinput-view.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
-        UserinputController userinputController = loader.getController();
-        userinputController.init(gameLogic);
+        if(gameLogic != null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/UserInput-view.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+            UserInputController userinputController = loader.getController();
+            userinputController.init(gameLogic);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning alert");
+            alert.setHeaderText("You have not played the game!");
+            alert.setContentText("Press F while playing the game to record your score!");
+            alert.showAndWait();
+        }
     }
 }

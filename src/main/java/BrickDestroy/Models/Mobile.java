@@ -1,4 +1,4 @@
-package BrickDestroy;
+package BrickDestroy.Models;
 
 import javafx.geometry.Point2D;
 

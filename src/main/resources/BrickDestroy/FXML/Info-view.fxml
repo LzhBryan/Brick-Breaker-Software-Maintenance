@@ -6,17 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="313.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.InfoController">
-   <children>
-      <TextArea editable="false" layoutX="142.0" layoutY="21.0" prefHeight="272.0" prefWidth="406.0" promptText="ddd" text="How to play:&#10;&#10;A - move Left&#10;&#10;D - move Right&#10;&#10;Spacebar - Start / Pause the game&#10;&#10;ALT + SHIFT + F1 - popup game settings">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextArea>
-      <ImageView fitHeight="45.0" fitWidth="58.0" layoutX="33.0" layoutY="14.0" onMouseClicked="#returnHomeMenu" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../CSS/img.png" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane prefHeight="313.0" prefWidth="626.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="BrickDestroy.Controllers.InfoController">
+   <TextArea editable="false" layoutX="142.0" layoutY="21.0" prefHeight="272.0"
+             prefWidth="406.0" promptText="ddd"
+             text="How to play:&#10;&#10;A - move Left&#10;&#10;D - move Right&#10;&#10;Spacebar - Start / Pause the game&#10;&#10;ALT + SHIFT + F1 - popup game settings">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextArea>
+   <ImageView fitHeight="45.0" fitWidth="58.0" layoutX="33.0" layoutY="14.0"
+              onMouseClicked="#returnHomeMenu" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../CSS/backButton.png"/>
+   </ImageView>
 </AnchorPane>

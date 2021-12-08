@@ -1,10 +1,10 @@
 package BrickDestroy.Controllers;
 
-import BrickDestroy.GameLogic;
+import BrickDestroy.Models.GameLogic;
 import BrickDestroy.Models.DebugConsoleModel;
 import BrickDestroy.Models.GameBoardModel;
 import BrickDestroy.Models.PauseMenuModel;
-import BrickDestroy.Player;
+import BrickDestroy.Models.Player;
 import BrickDestroy.Views.GameBoardView;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.*;
 
 public class GameBoardController {
@@ -36,12 +35,12 @@ public class GameBoardController {
     }
 
     AnimationTimer animationTimer = new AnimationTimer() {
-        private long lastUpdate = 0;
+        private long fpsFlag = 0;
         private final static long DELAY_DURATION = 10_000_000;
 
         @Override
         public void handle(long currentNanoTime) {
-            if(currentNanoTime - lastUpdate >= DELAY_DURATION){
+            if(currentNanoTime - fpsFlag >= DELAY_DURATION){
                 gamePulse(gameLogic);
 
                 if(gameLogic.isBallLost())
@@ -53,7 +52,7 @@ public class GameBoardController {
                 handlePlayerMovement(gameLogic.getPlayer());
 
             }
-            lastUpdate = currentNanoTime;
+            fpsFlag = currentNanoTime;
         }
     };
 
@@ -67,10 +66,8 @@ public class GameBoardController {
 
     public void handleBallLost(){
         if(gameLogic.ballEnd()){
-            //gameLogic.wallReset();
-            levelIncrement();
+            gameLogic.wallReset();
             displayMessage("Game over");
-            //scorePopup(gameBoardModel.getGameStage());
         }
         gameLogic.ballReset();
         animationTimer.stop();
@@ -208,6 +205,6 @@ public class GameBoardController {
         scoreboard.show();
         ScoreboardController scoreboardController = loader.getController();
         scoreboardController.init(gameLogic);
-        scoreboardController.readScorelist();
+        scoreboardController.readScoreList();
     }
 }

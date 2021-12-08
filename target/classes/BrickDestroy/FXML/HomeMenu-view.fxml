@@ -18,10 +18,9 @@
          <Font name="Monospaced Regular" size="23.0" />
       </font>
       <graphic>
-         <ImageView fitHeight="47.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../CSS/playButton.png" />
-            </image>
+         <ImageView fitHeight="47.0" fitWidth="89.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../CSS/playButton.png"/>
          </ImageView>
       </graphic>
    </Button>

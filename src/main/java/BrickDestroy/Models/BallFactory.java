@@ -1,10 +1,10 @@
-package BrickDestroy;
+package BrickDestroy.Models;
 
 import javafx.geometry.Point2D;
 
 public class BallFactory {
 
-    public Ball makeBall(String ballType,Point2D ballPos) {
+    public Ball makeBall(String ballType, Point2D ballPos) {
         if (ballType == null)
             return null;
 

@@ -1,9 +1,9 @@
 package BrickDestroy.Views;
 
-import BrickDestroy.Ball;
-import BrickDestroy.Brick;
-import BrickDestroy.GameLogic;
-import BrickDestroy.Player;
+import BrickDestroy.Models.Ball;
+import BrickDestroy.Models.Brick;
+import BrickDestroy.Models.GameLogic;
+import BrickDestroy.Models.Player;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
