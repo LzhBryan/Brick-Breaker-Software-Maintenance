@@ -1,8 +1,14 @@
 package BrickDestroy;
 
+import BrickDestroy.Controllers.ScoreboardController;
+import BrickDestroy.Controllers.UserinputController;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.scene.Parent;
 import javafx.scene.shape.Rectangle;
+
+import java.io.IOException;
 import java.util.Random;
 
 public class GameLogic {
@@ -214,11 +220,8 @@ public class GameLogic {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public int getLevel() {
         return level;
     }
+
 }

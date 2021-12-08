@@ -4,7 +4,6 @@ import BrickDestroy.GameLogic;
 import BrickDestroy.Models.DebugConsoleModel;
 import BrickDestroy.Models.GameBoardModel;
 import BrickDestroy.Models.PauseMenuModel;
-import BrickDestroy.Models.ScoreModel;
 import BrickDestroy.Player;
 import BrickDestroy.Views.GameBoardView;
 import javafx.animation.AnimationTimer;
@@ -79,7 +78,6 @@ public class GameBoardController {
     }
 
     public void levelIncrement(){
-        scorePopup(gameBoardModel.getGameStage());
         if (gameLogic.hasLevel()) {
             gameLogic.ballReset();
             gameLogic.wallReset();
@@ -128,6 +126,9 @@ public class GameBoardController {
 
             else if (e.getCode() == KeyCode.ESCAPE)
                 showPauseMenu((Stage)((Node)e.getSource()).getScene().getWindow());
+
+            else if (e.getCode() == KeyCode.F)
+                scoreBoard((Stage)((Node)e.getSource()).getScene().getWindow());
         });
     }
 
@@ -193,21 +194,20 @@ public class GameBoardController {
         pauseMenuController.initModel(pauseMenuModel);
     }
 
-    public void scorePopup(Stage currentStage){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/ScorePopup-view.fxml"));
-        Stage scorePopup = new Stage();
-        scorePopup.initOwner(currentStage);
-        scorePopup.initModality(Modality.APPLICATION_MODAL);
+    public void scoreBoard(Stage currentStage){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Scoreboard-view.fxml"));
+        Stage scoreboard = new Stage();
+        scoreboard.initOwner(currentStage);
+        scoreboard.initModality(Modality.APPLICATION_MODAL);
         try {
-            scorePopup.setScene(new Scene(loader.load()));
+            scoreboard.setScene(new Scene(loader.load()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        scorePopup.setTitle("Score for this round!");
-        scorePopup.show();
-        ScoreModel scoreModel = new ScoreModel(gameLogic);
-        ScoreController scoreController = loader.getController();
-        scoreController.initModel(scoreModel);
+        scoreboard.setTitle("Scoreboard!");
+        scoreboard.show();
+        ScoreboardController scoreboardController = loader.getController();
+        scoreboardController.init(gameLogic);
+        scoreboardController.readScorelist();
     }
-
 }

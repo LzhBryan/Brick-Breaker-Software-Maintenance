@@ -12,8 +12,8 @@
             <Font size="38.0" />
          </font>
       </Text>
-      <Button fx:id="continueButton" layoutX="65.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#resume" prefHeight="37.0" prefWidth="114.0" text="Continue" />
-      <Button fx:id="restartButton" layoutX="65.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#restart" prefHeight="38.0" prefWidth="114.0" text="Restart" />
-      <Button fx:id="exitButton" layoutX="65.0" layoutY="279.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="38.0" prefWidth="114.0" text="Exit" />
+      <Button fx:id="continueButton" layoutX="65.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#resume" prefHeight="37.0" prefWidth="114.0" text="Continue" />
+      <Button fx:id="restartButton" layoutX="65.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#restart" prefHeight="38.0" prefWidth="114.0" text="Restart" />
+      <Button fx:id="exitButton" layoutX="65.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="38.0" prefWidth="114.0" text="Exit" />
    </children>
 </AnchorPane>

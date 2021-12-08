@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -25,14 +26,14 @@ public class HomeMenuController {
     @FXML
     private Button exitMenuButton;
 
+    private final GameLogic gameLogic = new GameLogic(new Rectangle(0,0,
+            GameBoardModel.DEF_WIDTH, GameBoardModel.DEF_HEIGHT),
+            30,3,
+            (double) 6/2, new Point2D(300,430));
+
     public void switchToGameScreen(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         GameBoardModel gameBoardModel = new GameBoardModel(stage);
-        GameLogic gameLogic;
-        gameLogic = new GameLogic(new Rectangle(0,0,
-                GameBoardModel.DEF_WIDTH, GameBoardModel.DEF_HEIGHT),
-                30,3,
-                (double) 6/2, new Point2D(300,430));
         GameBoardView gameBoardView = new GameBoardView(gameLogic);
         GameBoardController gameBoardController = new GameBoardController(gameBoardModel, gameBoardView, gameLogic);
         stage.setScene(gameBoardView.getScene());
