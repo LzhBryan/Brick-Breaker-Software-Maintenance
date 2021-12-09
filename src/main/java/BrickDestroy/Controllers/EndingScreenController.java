@@ -5,7 +5,6 @@ import BrickDestroy.TextOutput;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,19 +18,13 @@ public class EndingScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TextOutput textOutput = textOut -> Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                text.setText(textOut);
-            }
-        });
-
+        TextOutput textOutput = textOut -> Platform.runLater(() -> text.setText(textOut));
         textAnimator = new TextAnimator("CONGRATULATIONS GAME HAS ENDED!",
                 100, textOutput);
     }
 
     @FXML
-    void start(MouseEvent event) {
+    void start() {
         Thread thread = new Thread(textAnimator);
         thread.start();
     }

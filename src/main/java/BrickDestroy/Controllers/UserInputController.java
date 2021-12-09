@@ -3,7 +3,6 @@ package BrickDestroy.Controllers;
 import BrickDestroy.Models.GameLogic;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -19,7 +18,7 @@ public class UserInputController {
         this.gameLogic = gameLogic;
     }
 
-    public void submit(MouseEvent event) throws IOException {
+    public void submit() throws IOException {
 
         String username = textField.getText();
         if (!username.isEmpty()) {

@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class ScoreboardController {
         readScoreList();
     }
 
-    public void updateScoreboard(MouseEvent event) throws IOException {
+    public void updateScoreboard() throws IOException {
         if(gameLogic != null){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/UserInput-view.fxml"));
             Stage stage = new Stage();

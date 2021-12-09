@@ -33,7 +33,7 @@ public class HomeMenuController {
         currentStage.show();
     }
 
-    public void showLeaderboard(MouseEvent event) {
+    public void showLeaderboard() {
         Stage newStage = new Stage();
         newStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Scoreboard-view.fxml",
                 "ScoreboardMenu", gameBoardView, newStage));
@@ -41,7 +41,7 @@ public class HomeMenuController {
         newStage.show();
     }
 
-    public void exit(MouseEvent event) {
+    public void exit() {
         System.out.println("Goodbye " + System.getProperty("user.name"));
         System.exit(0);
     }
