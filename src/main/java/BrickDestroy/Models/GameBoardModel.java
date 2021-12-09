@@ -9,12 +9,14 @@ public class GameBoardModel {
     private String gameMessage;
     private boolean gamePausing;
     private boolean gameRunning;
+    private boolean gameLost;
 
     public GameBoardModel(){
         this.userInput = "";
         this.gameMessage = "";
         this.gameRunning = false;
         this.gamePausing = false;
+        this.gameLost = false;
     }
 
     public String getUserInput() {
@@ -43,5 +45,13 @@ public class GameBoardModel {
 
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
+    }
+
+    public boolean isGameLost() {
+        return gameLost;
+    }
+
+    public void setGameLost(boolean gameLost) {
+        this.gameLost = gameLost;
     }
 }

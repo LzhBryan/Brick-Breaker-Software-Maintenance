@@ -19,6 +19,9 @@ public class BrickFactory {
         else if(brickType.equalsIgnoreCase("STEEL"))
             return new SteelBrick(position, size);
 
+        else if(brickType.equalsIgnoreCase("METAL"))
+            return new MetalBrick(position, size);
+
         return null;
     }
 }

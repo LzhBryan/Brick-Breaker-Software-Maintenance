@@ -8,6 +8,7 @@ import BrickDestroy.Views.GameBoardView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
@@ -63,27 +64,29 @@ public class GameBoardController {
     }
 
     public void handleBallLost(){
-        if(gameLogic.ballEnd()){
-            gameLogic.wallReset();
-            displayMessage("Game over");
-        }
+        if(gameLogic.ballEnd())
+            penalty();
+
         gameLogic.ballReset();
         animationTimer.stop();
         gameBoardModel.setGameRunning(false);
+        gameLogic.reduceScore(100);
+        animationTimer.stop();
     }
 
     public void levelIncrement(){
-        if (gameLogic.hasLevel()) {
-            gameLogic.ballReset();
-            gameLogic.wallReset();
-            gameLogic.nextLevel();
-            displayMessage("Go to Next Level");
-            animationTimer.stop();
-            gameBoardModel.setGameRunning(false);
-        }
+        if (gameLogic.hasLevel())
+           newLevel();
+
         else {
             displayMessage("ALL WALLS DESTROYED");
             animationTimer.stop();
+            Stage EndingScreen = new Stage();
+            EndingScreen.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/EndingScreen-view.fxml",
+                    "EndingScreen", gameBoardView, new Stage()));
+            EndingScreen.initModality(Modality.APPLICATION_MODAL);
+            EndingScreen.setTitle("Ending Screen");
+            EndingScreen.show();
         }
     }
 
@@ -128,6 +131,11 @@ public class GameBoardController {
     }
 
     public void gameTimerAction(){
+        if (gameBoardModel.isGameLost()){
+            gameBoardModel.setGameLost(false);
+            gameLogic.setScore(0);
+        }
+
         if(gameBoardModel.isGameRunning()){
             if (gameBoardModel.isGamePausing()) {
                 gameBoardModel.setGamePausing(false);
@@ -151,7 +159,7 @@ public class GameBoardController {
     public void showDebugPanel(Stage previousStage) {
         Stage debugPanelStage = new Stage();
         debugPanelStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/DebugConsole-view.fxml",
-                "DebugConsole", gameBoardView, previousStage));
+               "DebugConsole", gameBoardView, previousStage));
         debugPanelStage.setX(previousStage.getX() + GameBoardModel.DEF_WIDTH/8);
         debugPanelStage.setY(previousStage.getY() + GameBoardModel.DEF_HEIGHT/3);
         debugPanelStage.initOwner(previousStage);
@@ -187,5 +195,34 @@ public class GameBoardController {
         scoreboard.initModality(Modality.APPLICATION_MODAL);
         scoreboard.setTitle("Scoreboard!");
         scoreboard.show();
+    }
+
+    public void penalty(){
+        gameLogic.wallReset();
+        displayMessage("Game over");
+        gameLogic.reduceScore(gameLogic.getScore()/5);
+        animationTimer.stop();
+        gameBoardModel.setGameRunning(false);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("GAME OVER");
+        alert.setHeaderText("Results: " + gameLogic.getScore());
+        alert.setContentText("Save before pressing spacebar if you wish to");
+        alert.show();
+        gameBoardModel.setGameLost(true);
+    }
+
+    public void newLevel(){
+        gameLogic.increaseScore(gameLogic.getBallCount());
+        animationTimer.stop();
+        gameBoardModel.setGameRunning(false);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("CONGRATS");
+        alert.setContentText("You are rewarded with " + 300*gameLogic.getBallCount() + " points");
+        alert.show();
+        gameLogic.ballReset();
+        gameLogic.wallReset();
+        gameLogic.nextLevel();
+        gameLogic.resetBallCount();
+        displayMessage("Go to Next Level");
     }
 }

@@ -5,7 +5,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
 public class GameLevels {
-    public static final int LEVELS_COUNT = 4;
+    public static final int LEVELS_COUNT = 6;
 
     private final GameLogic gameLogic;
     private final Rectangle drawArea;
@@ -84,6 +84,12 @@ public class GameLevels {
 
         else if (level == 3)
             return new String[]{"STEEL", "CEMENT"};
+
+        else if (level == 4)
+            return new String[]{"STEEL", "STEEL"};
+
+        else if (level == 5)
+            return new String[]{"CEMENT", "METAL"};
 
         return null;
     }

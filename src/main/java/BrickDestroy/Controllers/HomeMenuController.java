@@ -2,17 +2,13 @@ package BrickDestroy.Controllers;
 
 import BrickDestroy.Models.GameBoardModel;
 import BrickDestroy.Models.GameLogic;
-import BrickDestroy.Views.GameBoardView;
 import BrickDestroy.MvcManager;
-import javafx.fxml.FXMLLoader;
+import BrickDestroy.Views.GameBoardView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class HomeMenuController {
 
@@ -30,14 +26,14 @@ public class HomeMenuController {
         stage.setScene(gameBoardView.getScene());
     }
 
-    public void showInfoMenu(MouseEvent event) throws IOException {
+    public void showInfoMenu(MouseEvent event) {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Info-view.fxml",
                 "Info", gameBoardView, currentStage));
         currentStage.show();
     }
 
-    public void showLeaderboard(MouseEvent event) throws IOException {
+    public void showLeaderboard(MouseEvent event) {
         Stage newStage = new Stage();
         newStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Scoreboard-view.fxml",
                 "ScoreboardMenu", gameBoardView, newStage));

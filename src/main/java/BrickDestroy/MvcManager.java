@@ -1,9 +1,6 @@
 package BrickDestroy;
 
-import BrickDestroy.Controllers.DebugConsoleController;
-import BrickDestroy.Controllers.InfoController;
-import BrickDestroy.Controllers.PauseMenuController;
-import BrickDestroy.Controllers.ScoreboardController;
+import BrickDestroy.Controllers.*;
 import BrickDestroy.Models.DebugConsoleModel;
 import BrickDestroy.Models.GameLogic;
 import BrickDestroy.Models.PauseMenuModel;
@@ -36,22 +33,22 @@ public class MvcManager {
 
     public void checkModel(String model, FXMLLoader loader, GameBoardView gameBoardView, Stage stage){
         if(model.equalsIgnoreCase("DebugConsole"))
-            debugConsole(loader, gameBoardView, stage);
+            debugConsole(loader);
 
         else if (model.equalsIgnoreCase("PauseMenu"))
             pauseMenu(loader, gameBoardView, stage);
 
         else if(model.equalsIgnoreCase("Scoreboard"))
-            scoreboard(loader, gameBoardView, stage);
+            scoreboard(loader);
 
         else if(model.equalsIgnoreCase("Info"))
-            info(loader, gameBoardView, stage);
+            info(loader, stage);
 
         else if(model.equalsIgnoreCase("ScoreboardMenu"))
-            scoreboardMenu(loader, gameBoardView, stage);
+            scoreboardMenu(loader);
     }
 
-    public void debugConsole(FXMLLoader loader, GameBoardView gameBoardView, Stage stage){
+    public void debugConsole(FXMLLoader loader){
         DebugConsoleModel debugModel = new DebugConsoleModel(gameLogic);
         DebugConsoleController debugConsoleController = loader.getController();
         debugConsoleController.initModel(debugModel);
@@ -63,18 +60,18 @@ public class MvcManager {
         pauseMenuController.initModel(pauseMenuModel);
     }
 
-    public void scoreboard(FXMLLoader loader, GameBoardView gameBoardView, Stage stage){
+    public void scoreboard(FXMLLoader loader){
         ScoreboardController scoreboardController = loader.getController();
         scoreboardController.init(gameLogic);
         scoreboardController.readScoreList();
     }
 
-    public void info(FXMLLoader loader, GameBoardView gameBoardView, Stage stage){
+    public void info(FXMLLoader loader, Stage stage){
         InfoController infoController = loader.getController();
         infoController.receiveStage(stage);
     }
 
-    public void scoreboardMenu(FXMLLoader loader, GameBoardView gameBoardView, Stage stage){
+    public void scoreboardMenu(FXMLLoader loader){
         ScoreboardController scoreboardController = loader.getController();
         scoreboardController.readScoreList();
     }

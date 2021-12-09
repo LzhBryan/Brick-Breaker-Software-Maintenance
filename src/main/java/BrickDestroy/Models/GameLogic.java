@@ -32,7 +32,7 @@ public class GameLogic {
         speedX = 9;
         speedY = -7;
 //        speedX = randomizeSpeed(5, -2);
-//        speedY = randomizeSpeed(3, 0);
+//        speedY = -randomizeSpeed(7, 0);
         ball.setSpeed(speedX,speedY);
         player = new Player(ballPos,150,10, drawArea);
         this.area = drawArea;
@@ -70,29 +70,30 @@ public class GameLogic {
     public boolean collideBrickWall(){
 
         for(Brick brick : bricks){
-            boolean isCement = brick.getBrickName().equalsIgnoreCase("Cement Brick");
+            boolean isCrackable = brick.getBrickName().equalsIgnoreCase("Cement Brick")
+                                    || brick.getBrickName().equalsIgnoreCase("Metal Brick");
 
             switch (brick.findImpact(ball)) {
                 case Brick.UP_IMPACT -> {
                     score += brickScore(brick);
                     ball.reverseY();
-                    return isCement ? brick.setImpact(ball.getDown(), Crack.UP) : brick.setImpact();
+                    return isCrackable ? brick.setImpact(ball.getDown(), Crack.UP) : brick.setImpact();
                 }
                 case Brick.DOWN_IMPACT -> {
                     score += brickScore(brick);
                     ball.reverseY();
-                    return isCement ? brick.setImpact(ball.getUp(), Crack.DOWN) : brick.setImpact();
+                    return isCrackable ? brick.setImpact(ball.getUp(), Crack.DOWN) : brick.setImpact();
                 }
 
                 case Brick.LEFT_IMPACT -> {
                     score += brickScore(brick);
                     ball.reverseX();
-                    return isCement ? brick.setImpact(ball.getRight(), Crack.RIGHT) : brick.setImpact();
+                    return isCrackable ? brick.setImpact(ball.getRight(), Crack.RIGHT) : brick.setImpact();
                 }
                 case Brick.RIGHT_IMPACT -> {
                     score += brickScore(brick);
                     ball.reverseX();
-                    return isCement ? brick.setImpact(ball.getLeft(), Crack.LEFT) : brick.setImpact();
+                    return isCrackable ? brick.setImpact(ball.getLeft(), Crack.LEFT) : brick.setImpact();
                 }
             }
         }
@@ -215,6 +216,18 @@ public class GameLogic {
         return score;
     }
 
+    public void reduceScore(int penalty){
+        score -= penalty;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void increaseScore(int ballCount){
+        score += 300*ballCount;
+    }
+
     public int brickScore(Brick brick){
         if(brick.getBrickName().equalsIgnoreCase("Clay Brick"))
             return 1;
@@ -224,6 +237,9 @@ public class GameLogic {
 
         else if(brick.getBrickName().equalsIgnoreCase("Cement Brick"))
             return 3;
+
+        else if(brick.getBrickName().equalsIgnoreCase("Metal Brick"))
+            return 4;
 
         return 0;
     }
