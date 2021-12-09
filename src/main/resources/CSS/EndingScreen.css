@@ -1,0 +1,21 @@
+.root{
+    -fx-background-image: url("EndingScreen.png");
+}
+
+Text{
+    -fx-font-size: 25px Verdana;
+    -fx-fill: #b5e7a0;
+}
+
+.button{
+    -fx-background-color: #d5f4e6;
+    -fx-background-radius: 5em;
+    -fx-text-fill: #034f84;
+    -fx-cursor: hand;
+    -fx-font-size: 20px Verdana;
+}
+
+.button: hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}

@@ -5,8 +5,14 @@
 #how{
     -fx-font-size: 32px;
 }
+
+#back{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
 .label{
-    -fx-font-size: 12px;
+    -fx-font-size: 17px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 )

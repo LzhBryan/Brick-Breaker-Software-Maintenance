@@ -1,13 +1,41 @@
+.root{
+    -fx-background-image: url("ScoreboardBackground.png");
+}
+
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
     -fx-text-fill: white;
 }
 
+#scoreList .list-cell {
+    -fx-alignment: center;
+}
+
+#usernameList .list-cell {
+    -fx-alignment: center;
+}
+
+.list-cell:odd {
+    -fx-background-color: #80ced6;
+}
+
 .list-cell:even {
-    -fx-background-color: white;
+    -fx-background-color: #d5f4e6;
 }
 
 .list-cell:filled:hover {
     -fx-background-color: #0093ff;
     -fx-text-fill: white;
+}
+
+.button{
+    -fx-background-color: #96ceb4;
+    -fx-background-radius: 5em;
+    -fx-font-color: #000000;
+    -fx-cursor: hand;
+}
+
+.button: hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
 }

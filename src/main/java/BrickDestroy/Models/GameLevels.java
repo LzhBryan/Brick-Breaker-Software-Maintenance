@@ -5,7 +5,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
 public class GameLevels {
-    public static final int LEVELS_COUNT = 6;
+    public static final int LEVELS_COUNT = 1;
 
     private final GameLogic gameLogic;
     private final Rectangle drawArea;

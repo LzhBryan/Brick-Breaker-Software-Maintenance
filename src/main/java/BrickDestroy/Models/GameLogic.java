@@ -68,7 +68,6 @@ public class GameLogic {
     }
 
     public boolean collideBrickWall(){
-
         for(Brick brick : bricks){
             boolean isCrackable = brick.getBrickName().equalsIgnoreCase("Cement Brick")
                                     || brick.getBrickName().equalsIgnoreCase("Metal Brick");

@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="313.0" prefWidth="480.0" stylesheets="@../../CSS/Info.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.InfoController">
-   <ImageView fitHeight="45.0" fitWidth="58.0" layoutX="31.0" layoutY="14.0" onMouseClicked="#returnHomeMenu" pickOnBounds="true" preserveRatio="true">
+<AnchorPane prefHeight="313.0" prefWidth="547.0" stylesheets="@../../CSS/Info.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.InfoController">
+   <ImageView fx:id="back" fitHeight="45.0" fitWidth="58.0" layoutX="31.0" layoutY="14.0" onMouseClicked="#returnHomeMenu" pickOnBounds="true" preserveRatio="true">
       <Image url="@../../CSS/backButton.png" />
    </ImageView>
    <Label fx:id="how" layoutX="142.0" layoutY="19.0" prefHeight="39.0" prefWidth="241.0" text="How to play:">
@@ -19,5 +19,5 @@
    <Label layoutX="162.0" layoutY="124.0" text="D - move Right" />
    <Label layoutX="162.0" layoutY="211.0" text="Spacebar - Start / Pause the game" />
    <Label layoutX="162.0" layoutY="257.0" text="ALT + SHIFT + F1 - popup game settings" />
-   <Label layoutX="162.0" layoutY="166.0" text="F - Scoreboard" />
+   <Label layoutX="162.0" layoutY="166.0" text="F - Scoreboard popup" />
 </AnchorPane>

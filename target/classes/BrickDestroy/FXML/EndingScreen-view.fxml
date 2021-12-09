@@ -5,11 +5,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.EndingScreenController">
-    <Text fx:id="text" layoutX="36.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="527.199951171875">
+<AnchorPane prefHeight="434.0" prefWidth="539.0" styleClass="root" stylesheets="@../../CSS/EndingScreen.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.EndingScreenController">
+    <Text fx:id="text" layoutX="132.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="274.4000549316406">
         <font>
           <Font size="30.0" />
         </font>
     </Text>
-    <Button layoutX="233.0" layoutY="330.0" mnemonicParsing="false" onMouseClicked="#start" prefHeight="43.0" prefWidth="112.0" text="Click me!" />
+    <Button layoutX="214.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#start" prefHeight="43.0" prefWidth="112.0" text="Click me!" />
 </AnchorPane>
