@@ -3,6 +3,7 @@ package BrickDestroy.Controllers;
 import BrickDestroy.Models.GameBoardModel;
 import BrickDestroy.Models.GameLogic;
 import BrickDestroy.Views.GameBoardView;
+import BrickDestroy.MvcManager;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -15,35 +16,33 @@ import java.io.IOException;
 
 public class HomeMenuController {
 
+    private final GameLogic gameLogic = new GameLogic(new Rectangle(0,0,
+            GameBoardModel.DEF_WIDTH, GameBoardModel.DEF_HEIGHT),
+            30,3,
+            (double) 6/2, new Point2D(300,430));
+    private final MvcManager mvcManager = new MvcManager(gameLogic);
+    private final GameBoardView gameBoardView = new GameBoardView(gameLogic);
+
     public void switchToGameScreen(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        GameLogic gameLogic = new GameLogic(new Rectangle(0,0,
-                GameBoardModel.DEF_WIDTH, GameBoardModel.DEF_HEIGHT),
-                30,3,
-                (double) 6/2, new Point2D(300,430));
         GameBoardModel gameBoardModel = new GameBoardModel();
-        GameBoardView gameBoardView = new GameBoardView(gameLogic);
-        new GameBoardController(gameBoardModel, gameBoardView, gameLogic);
+        new GameBoardController(gameBoardModel, gameBoardView, gameLogic, mvcManager);
         stage.setScene(gameBoardView.getScene());
     }
 
     public void showInfoMenu(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Info-view.fxml"));
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(new Scene(loader.load()));
+        currentStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Info-view.fxml",
+                "Info", gameBoardView, currentStage));
         currentStage.show();
-        InfoController infoController = loader.getController();
-        infoController.receiveStage(currentStage);
     }
 
     public void showLeaderboard(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Scoreboard-view.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(loader.load()));
+        newStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Scoreboard-view.fxml",
+                "ScoreboardMenu", gameBoardView, newStage));
         newStage.setTitle("ScoreBoard");
         newStage.show();
-        ScoreboardController scoreboardController = loader.getController();
-        scoreboardController.readScoreList();
     }
 
     public void exit(MouseEvent event) {

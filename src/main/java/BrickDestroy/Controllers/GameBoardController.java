@@ -1,33 +1,31 @@
 package BrickDestroy.Controllers;
 
 import BrickDestroy.Models.GameLogic;
-import BrickDestroy.Models.DebugConsoleModel;
 import BrickDestroy.Models.GameBoardModel;
-import BrickDestroy.Models.PauseMenuModel;
 import BrickDestroy.Models.Player;
+import BrickDestroy.MvcManager;
 import BrickDestroy.Views.GameBoardView;
 import javafx.animation.AnimationTimer;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.io.*;
 
 public class GameBoardController {
 
     private final GameLogic gameLogic;
     private final GameBoardModel gameBoardModel;
     private final GameBoardView gameBoardView;
+    private final MvcManager mvcManager;
 
-    public GameBoardController(GameBoardModel gameBoardModel, GameBoardView gameBoardView, GameLogic gameLogic) {
+    public GameBoardController(GameBoardModel gameBoardModel, GameBoardView gameBoardView, GameLogic gameLogic, MvcManager mvcManager) {
         this.gameBoardModel = gameBoardModel;
         this.gameBoardView = gameBoardView;
         this.gameLogic = gameLogic;
+        this.mvcManager = mvcManager;
         this.gameLogic.nextLevel();
         isKeyPressed(this.gameBoardView.getCanvas());
         isKeyReleased(this.gameBoardView.getCanvas());
@@ -151,62 +149,43 @@ public class GameBoardController {
     }
 
     public void showDebugPanel(Stage previousStage) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/DebugConsole-view.fxml"));
         Stage debugPanelStage = new Stage();
+        debugPanelStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/DebugConsole-view.fxml",
+                "DebugConsole", gameBoardView, previousStage));
         debugPanelStage.setX(previousStage.getX() + GameBoardModel.DEF_WIDTH/8);
         debugPanelStage.setY(previousStage.getY() + GameBoardModel.DEF_HEIGHT/3);
         debugPanelStage.initOwner(previousStage);
         debugPanelStage.initModality(Modality.APPLICATION_MODAL);
         debugPanelStage.setTitle("Game Settings");
-        try {
-            debugPanelStage.setScene(new Scene(loader.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         debugPanelStage.show();
-        DebugConsoleModel debugModel = new DebugConsoleModel(gameLogic);
-        DebugConsoleController debugConsoleController = loader.getController();
-        debugConsoleController.initModel(debugModel);
     }
 
     public void showPauseMenu(Stage previousStage) {
         animationTimer.stop();
         gameBoardModel.setGamePausing(true);
         previousStage.getScene().getRoot().setEffect(new GaussianBlur());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/PauseMenu-view.fxml"));
         Stage pauseMenuStage = new Stage(StageStyle.TRANSPARENT);
+        pauseMenuStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/PauseMenu-view.fxml",
+                "PauseMenu", gameBoardView, previousStage));
         pauseMenuStage.setX(previousStage.getX());
         pauseMenuStage.setY(previousStage.getY());
         pauseMenuStage.initOwner(previousStage);
         pauseMenuStage.initModality(Modality.APPLICATION_MODAL);
         pauseMenuStage.setOpacity(0.65);
-        try {
-            pauseMenuStage.setScene(new Scene(loader.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         pauseMenuStage.show();
-        PauseMenuModel pauseMenuModel = new PauseMenuModel(gameLogic, previousStage, gameBoardView);
-        PauseMenuController pauseMenuController = loader.getController();
-        pauseMenuController.initModel(pauseMenuModel);
     }
 
     public void scoreBoard(Stage currentStage){
         animationTimer.stop();
         gameBoardModel.setGamePausing(true);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BrickDestroy/FXML/Scoreboard-view.fxml"));
         Stage scoreboard = new Stage();
+        scoreboard.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Scoreboard-view.fxml",
+                "Scoreboard", gameBoardView, currentStage));
+        scoreboard.setX(currentStage.getX());
+        scoreboard.setY(currentStage.getY());
         scoreboard.initOwner(currentStage);
         scoreboard.initModality(Modality.APPLICATION_MODAL);
-        try {
-            scoreboard.setScene(new Scene(loader.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         scoreboard.setTitle("Scoreboard!");
         scoreboard.show();
-        ScoreboardController scoreboardController = loader.getController();
-        scoreboardController.init(gameLogic);
-        scoreboardController.readScoreList();
     }
 }
