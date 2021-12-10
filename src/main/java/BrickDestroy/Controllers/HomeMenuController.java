@@ -10,6 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+/**
+ * A controller class that is responsible for handling any user interaction/input with the home menu view.
+ */
 public class HomeMenuController {
 
     private final GameLogic gameLogic = new GameLogic(new Rectangle(0,0,
@@ -19,6 +22,10 @@ public class HomeMenuController {
     private final MvcManager mvcManager = new MvcManager(gameLogic);
     private final GameBoardView gameBoardView = new GameBoardView(gameLogic);
 
+    /**
+     * A method to change the scene to the game screen when user clicks on the play button.
+     * @param event capture the top most node whenever a mouse event occurs.
+     */
     public void switchToGameScreen(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         GameBoardModel gameBoardModel = new GameBoardModel();
@@ -26,6 +33,10 @@ public class HomeMenuController {
         stage.setScene(gameBoardView.getScene());
     }
 
+    /**
+     * A method to display the info screen when user clicks on the "Info" button.
+     * @param event capture the top most node whenever a mouse event occurs.
+     */
     public void showInfoMenu(MouseEvent event) {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Info-view.fxml",
@@ -33,6 +44,9 @@ public class HomeMenuController {
         currentStage.show();
     }
 
+    /**
+     * A method to load and display the scoreboard FXML when the user clicks on the "Leaderboard" button.
+     */
     public void showLeaderboard() {
         Stage newStage = new Stage();
         newStage.setScene(mvcManager.switchScenes("/BrickDestroy/FXML/Scoreboard-view.fxml",
@@ -41,6 +55,9 @@ public class HomeMenuController {
         newStage.show();
     }
 
+    /**
+     * A method to close the program when user clicks on the "Exit" button.
+     */
     public void exit() {
         System.out.println("Goodbye " + System.getProperty("user.name"));
         System.exit(0);

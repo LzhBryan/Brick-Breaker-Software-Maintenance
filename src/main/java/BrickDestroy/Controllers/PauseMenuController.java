@@ -42,7 +42,7 @@ public class PauseMenuController {
     @FXML
     public void restart(){
         pauseMenuModel.getGameLogic().wallReset();
-        pauseMenuModel.getGameLogic().ballReset();
+        pauseMenuModel.getGameLogic().reset();
         pauseMenuModel.getGameBoardModel().updateMessage("Restarting Game...");
         closeStage((Stage) restartButton.getScene().getWindow());
     }

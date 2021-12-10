@@ -4,6 +4,9 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * A class that handles all the levels making in the game.
+ */
 public class GameLevels {
     public static final int LEVELS_COUNT = 6;
 
@@ -14,6 +17,14 @@ public class GameLevels {
     private final double brickSizeRatio;
     private final Brick[][] levels;
 
+    /**
+     * A constructor to initialize the data and call method to start making levels in the game.
+     * @param gameLogic GameLogic object which contains all the entities logics and interactions in the game.
+     * @param drawArea this represents the game board screen dimension.
+     * @param brickCnt how many bricks to be built.
+     * @param lineCnt how many rows of bricks to be built.
+     * @param brickSizeRatio the ratio of the brick size.
+     */
     public GameLevels(GameLogic gameLogic, Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio ){
         this.gameLogic = gameLogic;
         this.drawArea = drawArea;
@@ -23,6 +34,10 @@ public class GameLevels {
         levels = makeLevels();
     }
 
+    /**
+     * A method to build all the levels and store into a two-dimensional array.
+     * @return the two-dimensional array.
+     */
     public Brick[][] makeLevels(){
         Brick[][] levels = new Brick[LEVELS_COUNT][];
         for(int i=0; i<LEVELS_COUNT; i++)
@@ -30,6 +45,11 @@ public class GameLevels {
         return levels;
     }
 
+    /**
+     * A method to build a particular level of brick walls in the game.
+     * @param level the level to determine what kind of bricks needed to build the brick wall.
+     * @return an array that contains the entire brick wall.
+     */
     public Brick[] buildBricks(int level) {
 
         int brickCount = this.brickCount;
@@ -72,6 +92,11 @@ public class GameLevels {
         return bricks;
     }
 
+    /**
+     * A method to determine what types of bricks to be built depending on the level.
+     * @param level the level to be built.
+     * @return a string array that contains the type of bricks to be built for that particular level.
+     */
     public String[] checkBrickType(int level){
         if (level == 0)
             return new String[]{"CLAY", "CLAY"};
@@ -94,6 +119,10 @@ public class GameLevels {
         return null;
     }
 
+    /**
+     * A getter method to obtain the two-dimensional bricks array that contains all the walls in every level.
+     * @return two-dimensional bricks array that contains all the walls in every level.
+     */
     public Brick[][] getLevels() {
         return levels;
     }

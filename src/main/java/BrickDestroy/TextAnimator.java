@@ -2,6 +2,9 @@ package BrickDestroy;
 
 import java.util.Random;
 
+/**
+ * A class to run the text animation.
+ */
 public class TextAnimator implements Runnable {
 
     private String text;
@@ -9,6 +12,12 @@ public class TextAnimator implements Runnable {
     private TextOutput textOutput;
     private Random random = new Random();
 
+    /**
+     * Constructor to initialize.
+     * @param text text to be displayed.
+     * @param animationTime the animation time.
+     * @param textField the text field.
+     */
     public TextAnimator(String text, int animationTime, TextOutput textField) {
         this.text = text;
         this.animationTime = animationTime;

@@ -33,7 +33,7 @@
            <Button mnemonicParsing="false" onMouseClicked="#skipLevels"
                    prefHeight="26.0" prefWidth="223.0" text="Skip Level"
                    GridPane.rowIndex="1"/>
-           <Button mnemonicParsing="false" onMouseClicked="#resetBalls"
+           <Button mnemonicParsing="false" onMouseClicked="#resetBallCount"
                    prefHeight="26.0" prefWidth="234.0" text="Reset ball"
                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
            <Slider fx:id="ballXSpeed" blockIncrement="1.0" majorTickUnit="1.0"

@@ -9,6 +9,9 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * A controller class that handles the user input in the game ending screen.
+ */
 public class EndingScreenController implements Initializable {
 
     TextAnimator textAnimator;
@@ -23,6 +26,9 @@ public class EndingScreenController implements Initializable {
                 100, textOutput);
     }
 
+    /**
+     * A method that starts the animation of the text.
+     */
     @FXML
     void start() {
         Thread thread = new Thread(textAnimator);

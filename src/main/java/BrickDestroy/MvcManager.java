@@ -30,7 +30,7 @@ public class MvcManager {
      * A method to load the fxml and call the checkModel method.
      * @param path The path to the FXML view in under resources directory.
      * @param model The model to be instantiated.
-     * @param gameBoardView The view class for gameBoard.
+     * @param gameBoardView The view class for gameBoard that displays data in the user interface.
      * @param stage The current stage or previous stage depending on what kind of operation to be carried out.
      * @return the scene that has loaded the FXML file.
      */
