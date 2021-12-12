@@ -99,32 +99,6 @@ public class GameBoardView {
         graphicsContext.stroke();
     }
 
-    /*
-    public void drawCrack(Path path){
-        if (path == null || path.getElements().isEmpty())
-            return;
-
-        graphicsContext.beginPath();
-        String[] str;
-        String crackPath, value;
-        double x, y;
-        for(int i = 0; i < 35; i++){
-            crackPath = path.getElements().get(i).toString();
-            value = crackPath.replaceAll("[a-zA-z]", "").replaceAll("=", "");
-            str = value.split(", ");
-            x = Double.parseDouble(str[0]);
-            y = Double.parseDouble(str[1]);
-            if (i==0)
-                graphicsContext.moveTo(x, y);
-            else
-                graphicsContext.lineTo(x, y);
-        }
-        graphicsContext.fill();
-        graphicsContext.closePath();
-        graphicsContext.stroke();
-    }
-     */
-
     /**
      * A method responsible to remove unwanted letters in the string and split the string into two values.
      * @param path the path that contains all 35 lines of crack elements.

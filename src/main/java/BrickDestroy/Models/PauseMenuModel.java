@@ -44,7 +44,7 @@ public class PauseMenuModel {
      * A getter method to obtain gameBoardView object.
      * @return gameBoardView object.
      */
-    public GameBoardView getGameBoardModel() {
+    public GameBoardView getGameBoardView() {
         return gameBoardView;
     }
 }

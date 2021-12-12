@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 public class Player implements Mobile {
     public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
     public static final Color INNER_COLOR = Color.GREEN;
-    private static final int DEF_MOVE_AMOUNT = 10; // it was 5
+    public static final int DEF_MOVE_AMOUNT = 10; // it was 5
 
     private final Rectangle playerFace;
     private Point2D ballPoint;
@@ -132,5 +132,13 @@ public class Player implements Mobile {
      */
     public int getHeight() {
         return height;
+    }
+
+    /**
+     * A getter method to obtain the velocity of player. (for junit testing)
+     * @return velocity of player.
+     */
+    public int getMoveAmount() {
+        return moveAmount;
     }
 }

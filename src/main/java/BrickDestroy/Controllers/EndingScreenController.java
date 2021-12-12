@@ -1,7 +1,7 @@
 package BrickDestroy.Controllers;
 
-import BrickDestroy.TextAnimator;
-import BrickDestroy.TextOutput;
+import BrickDestroy.Models.TextAnimator;
+import BrickDestroy.Models.TextOutput;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  */
 public class EndingScreenController implements Initializable {
 
-    TextAnimator textAnimator;
+    private TextAnimator textAnimator;
 
     @FXML
     private Text text;

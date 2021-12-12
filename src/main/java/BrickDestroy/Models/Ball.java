@@ -215,5 +215,17 @@ abstract public class Ball implements Mobile {
     public Point2D getRight() {
         return right;
     }
+
+    /**
+     * A getter method to obtain the horizontal velocity. (for junit testing)
+     * @return the horizontal velocity.
+     */
+    public int getSpeedX() {
+        return speedX;
+    }
+
+    public int getSpeedY() {
+        return speedY;
+    }
 }
 

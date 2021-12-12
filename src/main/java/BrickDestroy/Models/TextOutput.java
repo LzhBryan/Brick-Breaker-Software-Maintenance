@@ -1,4 +1,4 @@
-package BrickDestroy;
+package BrickDestroy.Models;
 
 /**
  * An interface for the text output.
