@@ -40,10 +40,8 @@ public class GameLogic {
         makeBall(ballPos);
         int speedX,speedY;
 
-        speedX = 7;
-        speedY = -7;
-//        speedX = randomizeSpeed(5, -2);
-//        speedY = -randomizeSpeed(3, 0);
+        speedX = randomizeSpeed(5, -2);
+        speedY = -randomizeSpeed(3, 0);
         ball.setSpeed(speedX,speedY);
         player = new Player(ballPos,150,10, drawArea);
         this.area = drawArea;
@@ -177,10 +175,8 @@ public class GameLogic {
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
         int speedX,speedY;
-        speedX = 7;
-        speedY = -7;
-//        speedX = randomizeSpeed(5, -2);
-//        speedY = -randomizeSpeed(3, 0);
+        speedX = randomizeSpeed(5, -2);
+        speedY = -randomizeSpeed(3, 0);
         ball.setSpeed(speedX,speedY);
         ballLost = false;
     }

@@ -4,8 +4,8 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Path;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CrackTest {
     Brick cementBrick = new CementBrick(new Point2D(300, 430), new Dimension2D(60, 20));
@@ -18,7 +18,7 @@ class CrackTest {
     @Test
     void draw() {
         makeCrack();
-        Assertions.assertNotNull(crack);
+        assertNotNull(crack);
     }
 
     /**
@@ -29,7 +29,7 @@ class CrackTest {
         crack.makeCrack(new Point2D(300, 430), 10, cementBrick.getBrickFace());
         makeCrack();
         crack.reset();
-        Assertions.assertTrue(path.getElements().isEmpty());
+        assertTrue(path.getElements().isEmpty());
     }
 
     /**
@@ -44,6 +44,6 @@ class CrackTest {
         String value = str.replaceAll("[a-zA-z]", "").replaceAll("=", "");
         String[] str1 = value.split(", ");
         double x = Double.parseDouble(str1[0]);
-        Assertions.assertTrue(x <= cement.getMaxX());
+        assertTrue(x <= cement.getMaxX());
     }
 }

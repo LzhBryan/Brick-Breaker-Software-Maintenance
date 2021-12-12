@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 public class Player implements Mobile {
     public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
     public static final Color INNER_COLOR = Color.GREEN;
-    public static final int DEF_MOVE_AMOUNT = 10; // it was 5
+    public static final int DEF_MOVE_AMOUNT = 5; // it was 5
 
     private final Rectangle playerFace;
     private Point2D ballPoint;
