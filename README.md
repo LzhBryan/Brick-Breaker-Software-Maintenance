@@ -1,4 +1,4 @@
-#Brick Breaker
+# Brick Breaker
 
 ## Key changes made for maintenance and extension
 
@@ -31,7 +31,7 @@ ball and player into the GameLogic class while GameLevels only contains levels r
 
 ### Extension
 
-####Scoreboard
+#### Scoreboard
 - Added a popup scoreboard window.
 - Permanent scoreboard list using a text file to store the score. 
 If such txt file is not found, a text file will be created to store the record.
@@ -39,20 +39,20 @@ If such txt file is not found, a text file will be created to store the record.
 permanent scoreboard, but not without playing the game.
 - Scoreboard is sorted in descending order.
 
-####Additional playable levels
+#### Additional playable levels
 - Added two extra levels.
 - The first added level contains only steel bricks while the second added level 
 contains a new brick called Metal brick which has both the crack and probability to break feature
 and stronger health point.
 
-####Exciting rewards and penalties
+#### Exciting rewards and penalties
 - When complete a level, players will be rewarded with additional points depending on the amount of ball left.
 - Points will be deducted if player loses a ball.
 - When all balls are lost, score will be reduced by a portion of the total score.
 - Rewarding points will always be more than deducting points.
 - A game ending screen will pop up if player completed all the levels.
 
-####Other features
+#### Other features
 - Info page and leaderboard page can be accessed at the home menu.
 - Info page to display the game controls while leaderboard page display the permanent scoreboard.
 - Improved design of all the FXML files with the use of background images, css styling.
