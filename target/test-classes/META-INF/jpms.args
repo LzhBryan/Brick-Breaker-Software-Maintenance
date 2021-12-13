@@ -1,0 +1,4 @@
+--patch-module
+com.javafx.brick_javafx=_
+--add-reads
+com.javafx.brick_javafx=ALL-UNNAMED

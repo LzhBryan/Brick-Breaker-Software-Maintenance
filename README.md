@@ -1,8 +1,9 @@
-# COMP2042_CW_hfybl1
+#Brick Breaker
 
 ## Key changes made for maintenance and extension
 
 ### Maintenance and refactoring
+- Change package name to a more meaningful name.
 - Extract Crack class out of the Brick abstract class into another class 
 as a class should not contain another class within.
 - Break down Wall class and created a new class GameLogic which contains the 
@@ -16,8 +17,9 @@ ball and player into the GameLogic class while GameLevels only contains levels r
   - Remove duplicated code by combining both makeSingleTypeLevel and makeChessboardLevel 
   into a single method while maintaining the same logic.
   - Improve the makeLevel method in GameLevels by extracting a block of code into a new method and
-  reduce the number of parameters.
+  reduce number of parameters.
 - Encapsulation, renaming of methods and variables, remove unused code, create a few interface classes, the use of polymorphism.
+- Create Junit tests and use maven build files.
 
 ### Complete conversion from Swing to JavaFX
 
@@ -28,6 +30,7 @@ ball and player into the GameLogic class while GameLevels only contains levels r
 - Created a MvcManager class which handles most of the Model, Controller and View instantiation.
 
 ### Extension
+
 ####Scoreboard
 - Added a popup scoreboard window.
 - Permanent scoreboard list using a text file to store the score. 
