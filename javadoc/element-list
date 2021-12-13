@@ -1,0 +1,5 @@
+module:com.javafx.brick_javafx
+BrickDestroy
+BrickDestroy.Controllers
+BrickDestroy.Models
+BrickDestroy.Views

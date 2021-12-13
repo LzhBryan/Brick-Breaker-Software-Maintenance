@@ -10,18 +10,16 @@ player and ball related code to separate the entities logic away from the levels
 - Rename Wall class to GameLevels as it is responsible for handling levels.
 - Break down GameBoard class by extracting the PauseMenu related code into another 
 class to promote single responsibility principle.
-- Created a Brick Factory and Ball Factory class that follows the Factory design pattern to return objects accordingly.
-- Further break down on GameLevels class to put all the entitites such as brick, 
+- Created a Brick Factory and Ball Factory class that follows the Factory design pattern to increase abstraction and reduce coupling.
+- Further break down GameLevels class to put all the entitites such as brick, 
 ball and player into the GameLogic class while GameLevels only contains levels related code.
   - Remove duplicated code by combining both makeSingleTypeLevel and makeChessboardLevel 
   into a single method while maintaining the same logic.
-  - Improve and simplify the makeLevel method in GameLevels by extracted a block of code into a new method,
-  reduce the amount of parameters by putting the parameters in the constructor and 
-  assign it to global variables so all methods can access easily without too many parameters.
+  - Improve the makeLevel method in GameLevels by extracting a block of code into a new method and
+  reduce the number of parameters.
 - Encapsulation, renaming of methods and variables, remove unused code, create a few interface classes, the use of polymorphism.
 
 ### Complete conversion from Swing to JavaFX
-- Converted every class into javaFx.
 
 ### MVC pattern
 - Created Models for some Controllers.
@@ -32,20 +30,20 @@ ball and player into the GameLogic class while GameLevels only contains levels r
 ### Extension
 ####Scoreboard
 - Added a popup scoreboard window.
-- Permanent scoreboard list using a txt file to store the score. 
-If such txt file is not found, a txt file will be created to store the record.
+- Permanent scoreboard list using a text file to store the score. 
+If such txt file is not found, a text file will be created to store the record.
 - Player can enter their username to be saved along with their score on the 
 permanent scoreboard, but not without playing the game.
 - Scoreboard is sorted in descending order.
 
-####Additional playable level
-- Added two extra level.
-- The first added level contains all steel bricks while the second added level 
-contains a new brick called Metal brick which has the both the crack and probability to break feature
-as well as stronger health point.
+####Additional playable levels
+- Added two extra levels.
+- The first added level contains only steel bricks while the second added level 
+contains a new brick called Metal brick which has both the crack and probability to break feature
+and stronger health point.
 
 ####Exciting rewards and penalties
-- When complete a single level, players will be rewarded with additional points depending on the amount of ball left.
+- When complete a level, players will be rewarded with additional points depending on the amount of ball left.
 - Points will be deducted if player loses a ball.
 - When all balls are lost, score will be reduced by a portion of the total score.
 - Rewarding points will always be more than deducting points.

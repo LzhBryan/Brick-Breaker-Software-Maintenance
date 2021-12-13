@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.javafx.brick_javafx","l":"BrickDestroy"},{"m":"com.javafx.brick_javafx","l":"BrickDestroy.Controllers"},{"m":"com.javafx.brick_javafx","l":"BrickDestroy.Models"},{"m":"com.javafx.brick_javafx","l":"BrickDestroy.Views"}];updateSearchResults();

@@ -1,0 +1,13 @@
+Bryan, 150
+Aaron, 70
+Kevin, 90
+Ian, 200
+Tony, 250
+Steve, 300
+Edward, 123
+Dennis, 450
+John, 320
+Bryan, 274
+Brian, 129
+Aaron, 69
+Kevin, 21

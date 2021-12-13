@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<DialogPane prefHeight="59.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.DebugConsoleController">
+<DialogPane prefHeight="59.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BrickDestroy.Controllers.DebugConsoleController">
    <content>
        <GridPane maxHeight="-Infinity" maxWidth="-Infinity"
                  minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
